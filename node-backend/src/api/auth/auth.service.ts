@@ -1,5 +1,5 @@
 import database from "../../loaders/database";
-import { ForgotPassword, Signup } from "./auth.schema";
+import { ForgotPassword, Signup, VerifyOTP } from "./auth.schema";
 import bcrypt from 'bcrypt';
 
 export const handleSignUp = async (data: Signup) => {
@@ -20,7 +20,9 @@ export const handleSignUp = async (data: Signup) => {
     );
 };
 
-export const handleVerifyOTP = async () => { };
+export const handleVerifyOTP = async (data: VerifyOTP) => {
+    //TODO: implement this function
+};
 
 export const handleForgotPassword = async (data: ForgotPassword) => {
     const userCollection = await (await database()).collection('user');

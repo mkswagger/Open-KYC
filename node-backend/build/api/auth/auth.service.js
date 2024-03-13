@@ -9,9 +9,6 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const handleSignUp = async (data) => {
     const userCollection = await (await (0, database_1.default)()).collection('user');
     const user = await userCollection.findOne({ email: data.email });
-    if (user) {
-        throw new Error('User already exists');
-    }
     const saltRounds = 10;
     const hash = await bcrypt_1.default.hash(data.password, saltRounds);
     await userCollection.insertOne({
@@ -22,7 +19,9 @@ const handleSignUp = async (data) => {
     });
 };
 exports.handleSignUp = handleSignUp;
-const handleVerifyOTP = async () => { };
+const handleVerifyOTP = async (data) => {
+    //TODO: implement this function
+};
 exports.handleVerifyOTP = handleVerifyOTP;
 const handleForgotPassword = async (data) => {
     const userCollection = await (await (0, database_1.default)()).collection('user');

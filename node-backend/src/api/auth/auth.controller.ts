@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Signup } from "./auth.schema";
-import { handleForgotPassword, handleSignUp } from "./auth.service";
+import { handleForgotPassword, handleSignUp, handleVerifyOTP } from "./auth.service";
 
 export const signuUp = async (req: Request, res: Response) => {
     try {
@@ -12,7 +12,15 @@ export const signuUp = async (req: Request, res: Response) => {
     }
 }
 
-export const verifyOTP = async (req: Request, res: Response) => { };
+export const verifyOTP = async (req: Request, res: Response) => {
+    try {
+        const { phone, otp } = req.body;
+        await handleVerifyOTP({ phone, otp });
+        res.status(200).json({ message: 'Phone number verified successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
 export const forgotPassword = async (req: Request, res: Response) => {
     try {

@@ -14,7 +14,16 @@ const signuUp = async (req, res) => {
     }
 };
 exports.signuUp = signuUp;
-const verifyOTP = async (req, res) => { };
+const verifyOTP = async (req, res) => {
+    try {
+        const { phone, otp } = req.body;
+        await (0, auth_service_1.handleVerifyOTP)({ phone, otp });
+        res.status(200).json({ message: 'Phone number verified successfully' });
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 exports.verifyOTP = verifyOTP;
 const forgotPassword = async (req, res) => {
     try {
