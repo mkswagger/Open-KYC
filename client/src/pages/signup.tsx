@@ -7,23 +7,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon } from "lucide-react";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -36,7 +20,7 @@ const formSchema = z.object({
     phone: z.string().length(13, { message: "Phone number must be 13 characters." }),
 });
 
-export default function ProfileForm() {
+export default function SignUpForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -62,6 +46,7 @@ export default function ProfileForm() {
 
             // Handle success response
             console.log("Form submitted successfully");
+            form.reset();
         } catch (error) {
             console.error("Error submitting form:", error);
         }
@@ -110,7 +95,7 @@ export default function ProfileForm() {
                     )}
                 />
                 <FormMessage />
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Next</Button>
             </form>
         </Form>
     );

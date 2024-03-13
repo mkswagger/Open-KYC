@@ -130,7 +130,8 @@ export default function ProfileForm() {
                       variant={"outline"}
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
+                        !field.value &&
+                        "text-muted-foreground"
                       )}
                     >
                       {field.value ? (
@@ -142,13 +143,17 @@ export default function ProfileForm() {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent
+                  className="w-auto p-0"
+                  align="start"
+                >
                   <Calendar
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
+                      date > new Date() ||
+                      date < new Date("1900-01-01")
                     }
                     initialFocus
                   />
@@ -164,17 +169,24 @@ export default function ProfileForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select an income range" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="<2L">Less than 2L</SelectItem>
+                  <SelectItem value="<2L">
+                    Less than 2L
+                  </SelectItem>
                   <SelectItem value="2-5L">2-5L</SelectItem>
                   <SelectItem value="5-10L">5-10L</SelectItem>
-                  <SelectItem value=">10L">Greater than 10L</SelectItem>
+                  <SelectItem value=">10L">
+                    Greater than 10L
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -187,15 +199,22 @@ export default function ProfileForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Employment Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select an employment type" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="Salaried">Salaried</SelectItem>
-                  <SelectItem value="Self Employed">Self Employed</SelectItem>
+                  <SelectItem value="Salaried">
+                    Salaried
+                  </SelectItem>
+                  <SelectItem value="Self Employed">
+                    Self Employed
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -209,7 +228,10 @@ export default function ProfileForm() {
             <FormItem>
               <FormLabel>Aadhaar Number</FormLabel>
               <FormControl>
-                <Input placeholder="Aadhaar Number" {...field} />
+                <Input
+                  placeholder="Aadhaar Number"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -233,7 +255,10 @@ export default function ProfileForm() {
             <FormItem>
               <FormLabel>PAN Card Number</FormLabel>
               <FormControl>
-                <Input placeholder="PAN Card Number" {...field} />
+                <Input
+                  placeholder="PAN Card Number"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
