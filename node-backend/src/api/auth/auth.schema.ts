@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const signupSchema = z.object({
     email: z.string().email(),
-    phone: z.number().min(1000000000).max(9999999999).transform((val) => val.toString()),
+    phone: z.string().min(13).max(13).regex(/^\+?\d{12}$/),
     password: z.string().min(8).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/),
 });
 
@@ -21,7 +21,7 @@ export class Signup {
 }
 
 export const verifyPhoneSchema = z.object({
-    phone: z.number().min(1000000000).max(9999999999).transform((val) => val.toString()),
+    phone: z.string().min(13).max(13).regex(/^\+?\d{12}$/),
     otp: z.number().min(100000).max(999999),
 });
 
