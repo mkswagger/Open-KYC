@@ -5,6 +5,9 @@ import bcrypt from 'bcrypt';
 export const handleSignUp = async (data: Signup) => {
     const userCollection = await (await database()).collection('user');
     const user = await userCollection.findOne({ email: data.email });
+    if (user) {
+        throw new Error('User already exists');
+    }
     const saltRounds = 10;
     const hash = await bcrypt.hash(data.password, saltRounds);
     await userCollection.insertOne(
