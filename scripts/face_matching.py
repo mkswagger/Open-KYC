@@ -22,13 +22,13 @@ def extract_and_store_embedding(reference_image_path):
 live_image_path = "scripts/comparison_Img.JPG"
 
 def compare_faces(live_image_path):
-    stored_embedding = np.load("stored_embedding.npy")
+    stored_embedding = np.load("stored_embedding.npy", allow_pickle=True)
 
     live_embedding = DeepFace.represent(img_path=live_image_path, model_name="VGG-Face")
     #must delete "24-03-13 20:48:40 - Directory /Users/aryanraj/.deepface created"
 
-    result = DeepFace.verify(img1_path = stored_embedding, img2_path = live_embedding, 
-                             model_name="VGG-Face", distance_metric="cosine")
+    result = DeepFace.verify(img1_path = reference_image_path, img2_path = live_image_path, 
+                            model_name="VGG-Face", distance_metric="cosine")
 
     if result['verified']:
         print("Faces match!")
