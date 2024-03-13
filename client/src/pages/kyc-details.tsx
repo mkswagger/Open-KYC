@@ -44,6 +44,9 @@ const formSchema = z.object({
   panCardNumber: z.string().length(10, {
     message: "PAN Card Number must be 10 characters.",
   }),
+  aadhaarCard: z.string(),
+  panCard: z.string(),
+  signature: z.string(),
 });
 
 export default function ProfileForm() {
@@ -57,10 +60,32 @@ export default function ProfileForm() {
       employmentType: "Salaried",
       aadhaarNumber: "",
       panCardNumber: "",
+      aadhaarCard: "",
+      panCard: "",
+      signature: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await fetch("/kycDetails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      // Handle success response
+      console.log("Form submitted successfully");
+    } catch (error) {
+      console.error("Error submitting form:", error.message);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -105,7 +130,7 @@ export default function ProfileForm() {
                       variant={"outline"}
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground",
+                        !field.value && "text-muted-foreground"
                       )}
                     >
                       {field.value ? (
@@ -191,12 +216,48 @@ export default function ProfileForm() {
         />
         <FormField
           control={form.control}
+          name="aadhaarCard"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Upload your Aadhaar Card</FormLabel>
+              <FormControl>
+                <Input id="AadharCardPhoto" type="file" />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="panCardNumber"
           render={({ field }) => (
             <FormItem>
               <FormLabel>PAN Card Number</FormLabel>
               <FormControl>
                 <Input placeholder="PAN Card Number" {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="panCard"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Upload your PAN Card</FormLabel>
+              <FormControl>
+                <Input id="panCardPhoto" type="file" />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="signature"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Upload your Signature</FormLabel>
+              <FormControl>
+                <Input id="signaturePhoto" type="file" />
               </FormControl>
             </FormItem>
           )}
