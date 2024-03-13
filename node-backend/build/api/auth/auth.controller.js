@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.forgotPassword = exports.verifyOTP = exports.signuUp = void 0;
+exports.sendOTP = exports.forgotPassword = exports.verifyEmail = exports.verifyPhone = exports.signuUp = void 0;
 const auth_schema_1 = require("./auth.schema");
 const auth_service_1 = require("./auth.service");
 const signuUp = async (req, res) => {
@@ -14,17 +14,28 @@ const signuUp = async (req, res) => {
     }
 };
 exports.signuUp = signuUp;
-const verifyOTP = async (req, res) => {
+const verifyPhone = async (req, res) => {
     try {
         const { phone, otp } = req.body;
-        await (0, auth_service_1.handleVerifyOTP)({ phone, otp });
+        await (0, auth_service_1.handleVerifyPhone)({ phone, otp });
         res.status(200).json({ message: 'Phone number verified successfully' });
     }
     catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
-exports.verifyOTP = verifyOTP;
+exports.verifyPhone = verifyPhone;
+const verifyEmail = async (req, res) => {
+    try {
+        const { email, otp } = req.body;
+        await (0, auth_service_1.handleVerifyEmail)({ email, otp });
+        res.status(200).json({ message: 'Email verified successfully' });
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+exports.verifyEmail = verifyEmail;
 const forgotPassword = async (req, res) => {
     try {
         const { password } = req.body;
@@ -37,4 +48,15 @@ const forgotPassword = async (req, res) => {
     }
 };
 exports.forgotPassword = forgotPassword;
+const sendOTP = async (req, res) => {
+    try {
+        const { device } = req.body;
+        await (0, auth_service_1.handleSendOTP)(device);
+        res.status(200).json({ message: `OTP sent to ${device}` });
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+exports.sendOTP = sendOTP;
 //# sourceMappingURL=auth.controller.js.map

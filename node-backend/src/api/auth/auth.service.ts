@@ -1,4 +1,6 @@
 import database from "../../loaders/database";
+import { sendMail } from "../../shared/sendMail";
+import { sendPhone } from "../../shared/sendPhone";
 import { ForgotPassword, Signup, VerifyEmail, VerifyPhone } from "./auth.schema";
 import bcrypt from 'bcrypt';
 
@@ -16,7 +18,8 @@ export const handleSignUp = async (data: Signup) => {
     const otpCollection = await (await database()).collection('otp');
     await otpCollection.insertOne({ device: data.phone, otp: phoneOtp, createdAt: new Date() });
     await otpCollection.insertOne({ device: data.email, otp: emailOtp, createdAt: new Date() });
-    // TODO: send otp to phone and email
+    await sendMail(data.email, 'Verify Email', `Your OTP is ${emailOtp}`);
+    await sendPhone(data.phone, `Your OTP is ${phoneOtp}`);
 
     await userCollection.insertOne(
         {
@@ -75,6 +78,11 @@ export const handleForgotPassword = async (data: ForgotPassword) => {
 export const handleSendOTP = async (device: string) => {
     const otpCollection = await (await database()).collection('otp');
     const otp = Math.floor(100000 + Math.random() * 900000);
-    //TODO: send otp to device
+    if (device.includes('@')) {
+        await sendMail(device, 'Verify Email', `Your OTP is ${otp}`);
+    }
+    else {
+        await sendPhone(device, `Your OTP is ${otp}`);
+    }
     await otpCollection.insertOne({ device, otp, createdAt: new Date() });
 };

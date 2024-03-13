@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateRequest = void 0;
+exports.otpSchema = exports.validateRequest = void 0;
+const zod_1 = require("zod");
 function validateRequest(location, schema) {
     return async (req, res, next) => {
         try {
@@ -14,4 +15,7 @@ function validateRequest(location, schema) {
     };
 }
 exports.validateRequest = validateRequest;
+exports.otpSchema = zod_1.z.object({
+    device: zod_1.z.string().email().or(zod_1.z.string().regex(/^[0-9]{10}$/)) // Email or Phone,
+});
 //# sourceMappingURL=validator.js.map
