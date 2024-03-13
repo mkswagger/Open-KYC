@@ -14,3 +14,7 @@ export function validateRequest(location: RequestLocation, schema: z.AnyZodObjec
         }
     };
 }
+
+export const otpSchema = z.object({
+    device: z.string().email().or(z.string().regex(/^[0-9]{10}$/))  // Email or Phone,
+});

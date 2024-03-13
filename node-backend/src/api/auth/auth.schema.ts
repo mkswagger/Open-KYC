@@ -20,17 +20,32 @@ export class Signup {
     }
 }
 
-export const verifyOTPSchema = z.object({
+export const verifyPhoneSchema = z.object({
     phone: z.number().min(1000000000).max(9999999999).transform((val) => val.toString()),
     otp: z.number().min(100000).max(999999),
 });
 
-export class VerifyOTP {
+export class VerifyPhone {
     phone: string;
     otp: number;
 
-    constructor(data: z.infer<typeof verifyOTPSchema>) {
+    constructor(data: z.infer<typeof verifyPhoneSchema>) {
         this.phone = data.phone;
+        this.otp = data.otp;
+    }
+}
+
+export const verifyEmailSchema = z.object({
+    email: z.string().email(),
+    otp: z.number().min(100000).max(999999),
+});
+
+export class VerifyEmail {
+    email: string;
+    otp: number;
+
+    constructor(data: z.infer<typeof verifyEmailSchema>) {
+        this.email = data.email;
         this.otp = data.otp;
     }
 }

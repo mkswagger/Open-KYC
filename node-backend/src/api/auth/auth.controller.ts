@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Signup } from "./auth.schema";
-import { handleForgotPassword, handleSignUp, handleVerifyOTP } from "./auth.service";
+import { handleForgotPassword, handleSendOTP, handleSignUp, handleVerifyEmail, handleVerifyPhone } from "./auth.service";
 
 export const signuUp = async (req: Request, res: Response) => {
     try {
@@ -12,11 +12,21 @@ export const signuUp = async (req: Request, res: Response) => {
     }
 }
 
-export const verifyOTP = async (req: Request, res: Response) => {
+export const verifyPhone = async (req: Request, res: Response) => {
     try {
         const { phone, otp } = req.body;
-        await handleVerifyOTP({ phone, otp });
+        await handleVerifyPhone({ phone, otp });
         res.status(200).json({ message: 'Phone number verified successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+export const verifyEmail = async (req: Request, res: Response) => {
+    try {
+        const { email, otp } = req.body;
+        await handleVerifyEmail({ email, otp });
+        res.status(200).json({ message: 'Email verified successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -28,6 +38,16 @@ export const forgotPassword = async (req: Request, res: Response) => {
         const { phone } = req.params;
         await handleForgotPassword({ phone, password });
         res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+export const sendOTP = async (req: Request, res: Response) => {
+    try {
+        const { device } = req.body;
+        await handleSendOTP(device);
+        res.status(200).json({ message: `OTP sent to ${device}` });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

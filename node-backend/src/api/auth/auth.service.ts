@@ -1,5 +1,5 @@
 import database from "../../loaders/database";
-import { ForgotPassword, Signup, VerifyOTP } from "./auth.schema";
+import { ForgotPassword, Signup, VerifyEmail, VerifyPhone } from "./auth.schema";
 import bcrypt from 'bcrypt';
 
 export const handleSignUp = async (data: Signup) => {
@@ -10,18 +10,51 @@ export const handleSignUp = async (data: Signup) => {
     }
     const saltRounds = 10;
     const hash = await bcrypt.hash(data.password, saltRounds);
+
+    const phoneOtp = Math.floor(100000 + Math.random() * 900000);
+    const emailOtp = Math.floor(100000 + Math.random() * 900000);
+    const otpCollection = await (await database()).collection('otp');
+    await otpCollection.insertOne({ device: data.phone, otp: phoneOtp, createdAt: new Date() });
+    await otpCollection.insertOne({ device: data.email, otp: emailOtp, createdAt: new Date() });
+    // TODO: send otp to phone and email
+
     await userCollection.insertOne(
         {
             email: data.email,
             phone: data.phone,
             password: hash,
-            isVerified: false
+            isPhoneVerified: false,
+            isEmailVerified: false,
         }
     );
 };
 
-export const handleVerifyOTP = async (data: VerifyOTP) => {
-    //TODO: implement this function
+export const handleVerifyPhone = async (data: VerifyPhone) => {
+    const otpCollection = await (await database()).collection('otp');
+    const otp = await otpCollection.findOne({ device: data.phone });
+    if (!otp || otp.otp !== data.otp) {
+        throw new Error('Invalid OTP');
+    }
+    if (new Date().getTime() - otp.createdAt.getTime() > 600000) {
+        throw new Error('OTP expired');
+    }
+    await otpCollection.deleteOne({ device: data.phone });
+    const userCollection = await (await database()).collection('user');
+    await userCollection.findOneAndUpdate({ phone: data.phone }, { $set: { isPhoneVerified: true } });
+};
+
+export const handleVerifyEmail = async (data: VerifyEmail) => {
+    const otpCollection = await (await database()).collection('otp');
+    const otp = await otpCollection.findOne({ device: data.email });
+    if (!otp || otp.otp !== data.otp) {
+        throw new Error('Invalid OTP');
+    }
+    if (new Date().getTime() - otp.createdAt.getTime() > 600000) {
+        throw new Error('OTP expired');
+    }
+    await otpCollection.deleteOne({ device: data.email });
+    const userCollection = await (await database()).collection('user');
+    await userCollection.findOneAndUpdate({ email: data.email }, { $set: { isEmailVerified: true } });
 };
 
 export const handleForgotPassword = async (data: ForgotPassword) => {
@@ -37,4 +70,11 @@ export const handleForgotPassword = async (data: ForgotPassword) => {
     const saltRounds = 10;
     const hash = await bcrypt.hash(data.password, saltRounds);
     await userCollection.findOneAndUpdate({ phone: data.phone }, { $set: { password: hash } });
+};
+
+export const handleSendOTP = async (device: string) => {
+    const otpCollection = await (await database()).collection('otp');
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    //TODO: send otp to device
+    await otpCollection.insertOne({ device, otp, createdAt: new Date() });
 };
