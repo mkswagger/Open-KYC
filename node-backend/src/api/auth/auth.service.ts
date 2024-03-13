@@ -28,6 +28,7 @@ export const handleSignUp = async (data: Signup) => {
             password: hash,
             isPhoneVerified: false,
             isEmailVerified: false,
+            dob: data.dob,
         }
     );
 };

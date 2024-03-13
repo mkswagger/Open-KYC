@@ -4,6 +4,7 @@ export const signupSchema = z.object({
     email: z.string().email(),
     phone: z.string().min(13).max(13).regex(/^\+?\d{12}$/),
     password: z.string().min(8).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/),
+    dob: z.string().regex(/^\d{2}-\d{2}-\d{4}$/),
 });
 
 export class Signup {
@@ -11,12 +12,14 @@ export class Signup {
     phone: string;
     password: string;
     isVerified: boolean;
+    dob: string;
 
     constructor(data: z.infer<typeof signupSchema>) {
         this.email = data.email;
         this.phone = data.phone;
         this.password = data.password;
         this.isVerified = false;
+        this.dob = data.dob;
     }
 }
 
