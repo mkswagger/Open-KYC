@@ -4,3 +4,4 @@ stored_embedding.npy
 __pycache__/
 /.idea
 /.vscode
+*build
