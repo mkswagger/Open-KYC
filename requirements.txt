@@ -1,62 +1,37 @@
-absl-py==2.1.0
-astunparse==1.6.3
-beautifulsoup4==4.12.3
-blinker==1.7.0
-certifi==2024.2.2
-charset-normalizer==3.3.2
-click==8.1.7
-deepface==0.0.86
-dm-tree==0.1.8
+boltons @ file:///Users/cbousseau/work/recipes/ci_py311/boltons_1677965141748/work
+brotlipy==0.7.0
+certifi @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_35eq66o3mo/croot/certifi_1700501684871/work/certifi
+cffi @ file:///Users/cbousseau/work/recipes/ci_py311/cffi_1677903595907/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+conda @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_0cwmmds6q9/croot/conda_1689269929143/work
+conda-content-trust @ file:///Users/cbousseau/work/recipes/ci_py311/conda-content-trust_1677970020347/work
+conda-libmamba-solver @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_48qgqxi1ys/croot/conda-libmamba-solver_1685032355439/work/src
+conda-package-handling @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_57h_oo3f_8/croot/conda-package-handling_1685024802254/work
+conda_package_streaming @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_4fwljxujl7/croot/conda-package-streaming_1685019683894/work
+cryptography @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_4a_lrlt_rt/croot/cryptography_1686613068564/work
+distlib==0.3.8
 filelock==3.13.1
-fire==0.6.0
-Flask==3.0.2
-flatbuffers==24.3.7
-gast==0.5.4
-gdown==5.1.0
-google-pasta==0.2.0
-grpcio==1.62.1
-gunicorn==21.2.0
-h5py==3.10.0
-idna==3.6
-importlib_metadata==7.0.2
-itsdangerous==2.1.2
-Jinja2==3.1.3
-keras==3.0.5
-libclang==16.0.6
-Markdown==3.5.2
-markdown-it-py==3.0.0
-MarkupSafe==2.1.5
-mdurl==0.1.2
-ml-dtypes==0.3.2
-mtcnn==0.1.1
-namex==0.0.7
+idna @ file:///Users/cbousseau/work/recipes/ci_py311/idna_1677906072337/work
+joblib @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_a357ltg47g/croot/joblib_1685113093574/work
+jsonpatch @ file:///tmp/build/80754af9/jsonpatch_1615747632069/work
+jsonpointer==2.1
+libmambapy @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_097by3g74m/croot/mamba-split_1685997889336/work/libmambapy
 numpy==1.26.4
-opencv-python==4.9.0.80
-opt-einsum==3.3.0
-packaging==24.0
-pandas==2.2.1
-pillow==10.2.0
-protobuf==4.25.3
-Pygments==2.17.2
-PyMuPDF==1.23.26
-PyMuPDFb==1.23.22
-PySocks==1.7.1
-python-dateutil==2.9.0.post0
-pytz==2024.1
-requests==2.31.0
-retina-face==0.0.14
-rich==13.7.1
-six==1.16.0
-soupsieve==2.5
-tensorboard==2.16.2
-tensorboard-data-server==0.7.2
-tensorflow==2.16.1
-tensorflow-io-gcs-filesystem==0.36.0
-termcolor==2.4.0
-tqdm==4.66.2
-typing_extensions==4.10.0
-tzdata==2024.1
-urllib3==2.2.1
-Werkzeug==3.0.1
-wrapt==1.16.0
-zipp==3.18.0
+packaging @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e946luvhc3/croot/packaging_1678965323926/work
+platformdirs==4.2.0
+pluggy @ file:///Users/cbousseau/work/recipes/ci_py311/pluggy_1677906980825/work
+pycosat @ file:///Users/cbousseau/work/recipes/ci_py311/pycosat_1677933552468/work
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+pyOpenSSL @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_ddecjfxr7g/croot/pyopenssl_1678965309681/work
+PySocks @ file:///Users/cbousseau/work/recipes/ci_py311/pysocks_1677906386870/work
+requests @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_37wt8ycste/croot/requests_1682607533309/work
+ruamel.yaml @ file:///Users/cbousseau/work/recipes/ci_py311/ruamel.yaml_1677934845850/work
+scikit-learn @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_75x_mwrnoj/croot/scikit-learn_1690978919744/work
+scipy @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_1b7r8zpma8/croot/scipy_1696543295098/work/dist/scipy-1.11.3-cp311-cp311-macosx_11_0_arm64.whl#sha256=73b819f2982eac97eeb9ece9fd252443b485f2a9c40f7dab1d0dd6d7d00a757b
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+threadpoolctl==3.3.0
+toolz @ file:///Users/cbousseau/work/recipes/ci_py311/toolz_1677925870232/work
+tqdm @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_ac7zic_tin/croot/tqdm_1679561870178/work
+urllib3 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e9usuw__8i/croot/urllib3_1686166332689/work
+virtualenv==20.25.1
+zstandard @ file:///Users/cbousseau/work/recipes/ci_py311_2/zstandard_1678996192313/work
