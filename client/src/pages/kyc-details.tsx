@@ -83,7 +83,7 @@ export default function ProfileForm() {
       // Handle success response
       console.log("Form submitted successfully");
     } catch (error) {
-      console.error("Error submitting form:", error.message);
+      console.error("Error submitting form:", error);
     }
   };
 
