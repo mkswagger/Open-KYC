@@ -124,7 +124,7 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
               />
             </div>
             <div className="flex items-center justify-between w-full">
-              <FormField
+{/*               <FormField
                 control={form.control}
                 name="dob"
                 render={({ field }) => (
@@ -164,7 +164,7 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="email"
