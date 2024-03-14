@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import CameraFeed from "@/components/videoKYC/VideoFeed";
+import CameraFeed from "@/components/kyc/VideoFeed";
 
 const PanVerification = () => {
   const videoRef = useRef(null);

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import CameraFeed from "@/components/videoKYC/VideoFeed";
+import CameraFeed from "@/components/kyc/VideoFeed";
 
 const LivePhoto = () => {
   const videoRef = useRef(null);
