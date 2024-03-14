@@ -75,6 +75,7 @@ Our platform aims to streamline and automate the Video KYC process, making it fa
 - CVQRScanner
 - Deepface
 - cascade classifier
+- Bark and whisper AI
 
 
 ## Conclusion
