@@ -2,34 +2,44 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import shutil
 import os
+import sys
 
+scripts_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'scripts/'))
+sys.path.append(scripts_path)
+
+print(sys.path)
 app = Flask(__name__)
 CORS(app)
 
-####################################### Functions ####################################
+# ####################################### Functions ####################################
 
-import cv2
-import xml.etree.ElementTree as ET
+# import cv2
+# import xml.etree.ElementTree as ET
 
-def decode_qr_opencv(image_path):
-    image = cv2.imread(image_path)
-    detector = cv2.QRCodeDetector()
-    data, bbox, _ = detector.detectAndDecode(image)
+# def decode_qr_opencv(image_path):
+#     image = cv2.imread(image_path)
+#     detector = cv2.QRCodeDetector()
+#     data, bbox, _ = detector.detectAndDecode(image)
 
-    if data:
-        return data
-    else:
-        print(f"No QR code detected in the image at {image_path}.")
-        return None
-
-
-######################################################################################
+#     if data:
+#         return data
+#     else:
+#         print(f"No QR code detected in the image at {image_path}.")
+#         return None
 
 
-ADHAAR_FOLDER = "scripts/aadhar_image"
-PAN_CARD = "scripts/Pan_card"
-SIGNATURE = "scripts/signatures"
-PASSPORTPIC = "scripts/Passport_pic"
+# ######################################################################################
+
+from face_extraction_export import extract_adhaar_face
+from face_matching_export import extract_and_store_embedding, compare_faces
+from qr_uid_matching_export import decode_qr_opencv, check_uid_last_4_digits
+
+ADHAAR_IMAGE = "scripts/aadhar_image"
+EXTRACTED_FACE_IMAEG = "scripts/extracted_face_image"
+COMPARISON_IMAGE = "scripts/comparison_image"
+PANCARD_IMAGE = "scripts/pancard_image"
+SIGNATURE_IMAGE = "scripts/signature_image"
+PASSPORT_SIZE_IMAGE = "scripts/passport_sizee_image"
 
 @app.route('/')
 def index():
@@ -43,7 +53,7 @@ def aadhar_upload():
     file = request.files['file']
 
     if file.filename != '':  # Check if filename is not empty
-        file_path = os.path.join(ADHAAR_FOLDER, file.filename)
+        file_path = os.path.join(ADHAAR_IMAGE, file.filename)
         file.save(file_path)
         qr_data = decode_qr_opencv(file_path)
 
@@ -74,7 +84,7 @@ def pan_upload():
     # Do something with the uploaded PAN file
     # return jsonify({'message': 'PAN uploaded successfully'})
     if file.filename != '':  # Check if filename is not empty
-        file_path = os.path.join(PAN_CARD, file.filename)
+        file_path = os.path.join(PANCARD_IMAGE, file.filename)
         file.save(file_path)
         return jsonify({'message': 'Pan Card uploaded and stored successfully'})
     else:
@@ -89,7 +99,7 @@ def signature_upload():
     # Do something with the uploaded signature file
     #return jsonify({'message': 'Signature uploaded successfully'})
     if file.filename != '':  # Check if filename is not empty
-        file_path = os.path.join(SIGNATURE, file.filename)
+        file_path = os.path.join(SIGNATURE_IMAGE, file.filename)
         file.save(file_path)
         return jsonify({'message': 'Signature uploaded and stored successfully'})
     else:
@@ -103,7 +113,7 @@ def passport_photo_upload():
     # Do something with the uploaded passport photo file
     # return jsonify({'message': 'Passport photo uploaded successfully'})
     if file.filename != '':  # Check if filename is not empty
-        file_path = os.path.join(PASSPORTPIC, file.filename)
+        file_path = os.path.join(PASSPORT_SIZE_IMAGE, file.filename)
         file.save(file_path)
         return jsonify({'message': 'Passport Picture uploaded and stored successfully'})
     else:
