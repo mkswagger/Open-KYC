@@ -79,6 +79,13 @@ export const handleForgotPassword = async (data: ForgotPassword) => {
 export const handleSendOTP = async (device: string) => {
     const otpCollection = await (await database()).collection('otp');
     const otp = Math.floor(100000 + Math.random() * 900000);
+    const otpData = await otpCollection.findOne({ device });
+    if (otpData) {
+        if (new Date().getTime() - otpData.createdAt.getTime() < 60000) {
+            throw new Error('Please wait before sending another OTP');
+        }
+        await otpCollection.deleteOne({ device });
+    }
     if (device.includes('@')) {
         await sendMail(device, 'Verify Email', `Your OTP is ${otp}`);
     }
