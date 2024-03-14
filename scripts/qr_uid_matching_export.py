@@ -9,7 +9,7 @@ def decode_qr_opencv(image_path):
     if data:
         return data
     else:
-        print(f"No QR code detected in the image at {image_path}.")
+        # print(f"No QR code detected in the image at {image_path}.")
         return None
 
 def check_uid_last_4_digits(qr_data, ocr_uid):
@@ -17,9 +17,11 @@ def check_uid_last_4_digits(qr_data, ocr_uid):
     qr_uid = root.get('uid', '')
     is_match = qr_uid[-4:] == ocr_uid[-4:]
     if is_match:
-        print(f"Success: The last 4 digits of the UID from the QR code ({qr_uid[-4:]}) match the OCR UID ({ocr_uid[-4:]}).")
+        # print(f"Success: The last 4 digits of the UID from the QR code ({qr_uid[-4:]}) match the OCR UID ({ocr_uid[-4:]}).")
+        return True
     else:
-        print(f"Error: The last 4 digits of the UID from the QR code ({qr_uid[-4:]}) do not match the OCR UID ({ocr_uid[-4:]}).")
+        # print(f"Error: The last 4 digits of the UID from the QR code ({qr_uid[-4:]}) do not match the OCR UID ({ocr_uid[-4:]}).")
+        return False
 
 # Example usage
 image_path = 'scripts/aadhar_image/aadhar.png'

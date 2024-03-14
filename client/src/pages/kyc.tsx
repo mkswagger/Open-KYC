@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "@/components/kyc/Form";
-import VideoFeed from "@/components/kyc/VideoFeed";
+import CaptureFrame from "@/components/kyc/CaptureFrame";
+import VerifyAndComplete from "@/components/kyc/VerifyAndComplete";
 
 export default function kyc() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -56,7 +57,8 @@ export default function kyc() {
 
       {/* Render Form or VideoFeed based on currentStep */}
       {currentStep === 1 && <Form onNextStep={handleNextStep} />}
-      {currentStep === 2 && <VideoFeed />}
+      {currentStep === 2 && <CaptureFrame onNextStep={handleNextStep} />}
+      {currentStep === 3 && <VerifyAndComplete />}
     </div>
   );
 }

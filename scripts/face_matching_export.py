@@ -14,9 +14,11 @@ def compare_faces(reference_image_path, live_image_path):
                             model_name="VGG-Face", distance_metric="cosine")
 
     if result['verified']:
-        print("Faces match!")
+        # print("Faces match!")
+        return True
     else:
-        print("Faces do not match!")
+        # print("Faces do not match!")
+        return False
 
 if __name__ == "__main__":
     extracted_face_path = "scripts/extracted_face_image/extracted_face.jpg"

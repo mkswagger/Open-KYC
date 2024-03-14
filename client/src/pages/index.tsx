@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { AnimatedTooltipPreview } from "@/landing/Avatars";
-import { LandingPage } from "@/landing/Landing";
+import { AnimatedTooltipPreview } from "@/components/landing/Avatars";
+import { LandingPage } from "@/components/landing/Landing";
 import SignUp from "@/components/auth/SignUp";
 import VerifyOTP from "@/components/auth/VerifyOTP";
 

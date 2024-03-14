@@ -2,7 +2,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/components/ui/button";
 
 export default function Dashboard() {
   return (

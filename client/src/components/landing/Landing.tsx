@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TypewriterEffect } from "../components/ui/typewriter-effect";
+import { TypewriterEffect } from "../ui/typewriter-effect";
 export function LandingPage() {
   const words = [
     {
