@@ -3,6 +3,8 @@ from flask_cors import CORS
 import shutil
 import os
 import sys
+from easyocr import Reader
+from pan_read import pan_read_data
 
 scripts_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'scripts/'))
 sys.path.append(scripts_path)
@@ -76,20 +78,38 @@ def aadhar_upload():
 
     
 
+# @app.route('/pan-upload', methods=['POST'])
+# def pan_upload():
+#     if 'file' not in request.files:
+#         return jsonify({'error': 'No file part'})
+#     file = request.files['file']
+#     # Do something with the uploaded PAN file
+#     # return jsonify({'message': 'PAN uploaded successfully'})
+#     if file.filename != '':  # Check if filename is not empty
+#         file_path = os.path.join(PANCARD_IMAGE, file.filename)
+#         file.save(file_path)
+#         return jsonify({'message': 'Pan Card uploaded and stored successfully'})
+#     else:
+    
+
+
+
 @app.route('/pan-upload', methods=['POST'])
 def pan_upload():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
     file = request.files['file']
-    # Do something with the uploaded PAN file
-    # return jsonify({'message': 'PAN uploaded successfully'})
     if file.filename != '':  # Check if filename is not empty
-        file_path = os.path.join(PANCARD_IMAGE, file.filename)
+        file_path = os.path.join(PAN_CARD, file.filename)
         file.save(file_path)
-        return jsonify({'message': 'Pan Card uploaded and stored successfully'})
+        reader = Reader(['en'])
+        result = reader.readtext(file_path, detail=0)
+        text = ' '.join(result)
+        data = pan_read_data(text)
+
+        return jsonify({'message': 'Pan Card uploaded and stored successfully', 'data': data})
     else:
         return jsonify({'error': 'Invalid file'})
-
 
 @app.route('/signature-upload', methods=['POST'])
 def signature_upload():
