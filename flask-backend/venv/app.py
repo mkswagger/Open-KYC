@@ -100,7 +100,7 @@ def pan_upload():
         return jsonify({'error': 'No file part'})
     file = request.files['file']
     if file.filename != '':  # Check if filename is not empty
-        file_path = os.path.join(PAN_CARD, file.filename)
+        file_path = os.path.join(PANCARD_IMAGE, file.filename)
         file.save(file_path)
         reader = Reader(['en'])
         result = reader.readtext(file_path, detail=0)
