@@ -6,6 +6,26 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+####################################### Functions ####################################
+
+import cv2
+import xml.etree.ElementTree as ET
+
+def decode_qr_opencv(image_path):
+    image = cv2.imread(image_path)
+    detector = cv2.QRCodeDetector()
+    data, bbox, _ = detector.detectAndDecode(image)
+
+    if data:
+        return data
+    else:
+        print(f"No QR code detected in the image at {image_path}.")
+        return None
+
+
+######################################################################################
+
+
 ADHAAR_FOLDER = "scripts/aadhar_image"
 PAN_CARD = "scripts/Pan_card"
 SIGNATURE = "scripts/signatures"
@@ -25,9 +45,26 @@ def aadhar_upload():
     if file.filename != '':  # Check if filename is not empty
         file_path = os.path.join(ADHAAR_FOLDER, file.filename)
         file.save(file_path)
-        return jsonify({'message': 'Aadhar uploaded and stored successfully'})
+        qr_data = decode_qr_opencv(file_path)
+
+        if qr_data:
+            return jsonify({
+                'message': 'Aadhar uploaded and stored successfully and data extracted successfully',
+                'qr_data': qr_data
+            })
+        else:
+            return jsonify({
+                'message': 'Aadhar uploaded and stored. No QR code detected.'
+            })
     else:
-        return jsonify({'error': 'Invalid file'})
+        return jsonify({'error': 'File not stored'})
+
+    
+    
+
+
+
+    
 
 @app.route('/pan-upload', methods=['POST'])
 def pan_upload():
