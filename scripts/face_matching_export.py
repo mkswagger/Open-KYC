@@ -19,7 +19,7 @@ def compare_faces(reference_image_path, live_image_path):
         print("Faces do not match!")
 
 if __name__ == "__main__":
-    extracted_face_path = "scrips/extracted_face/extracted_face.jpg"
+    extracted_face_path = "scripts/extracted_face_image/extracted_face.jpg"
     live_image_path = "scripts/comparison_image/comparison_Img.JPG"
     extract_and_store_embedding(extracted_face_path)
     compare_faces(extracted_face_path, live_image_path)
