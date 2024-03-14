@@ -13,9 +13,9 @@ def run_pipeline(aadhar_image_path, extracted_face_folder_path, extracted_face_p
     check_uid_last_4_digits(qr_data, uid)
 
 if __name__ == "__main__":
-    aadhar_image_path = "http://127.0.0.1:8000/image"
-    extracted_face_path = "scripts/extracted_face"
-    extracted_face_folder_path = "scripts/extracted_face/extracted_face.jpg"
+    aadhar_image_path = "scripts/aadhar_image/aadhar.png"
+    extracted_face_path = "scripts/extracted_face_image"
+    extracted_face_folder_path = "scripts/extracted_face_image/extracted_face.jpg"
     comparison_image_path = "scripts/comparison_image/comparison_Img.JPG"
-    qr_image_path = "scripts/qrcode.png"
+    qr_image_path = "scripts/aadhar_image/aadhar.png"
     run_pipeline(aadhar_image_path, extracted_face_folder_path, extracted_face_path, comparison_image_path, qr_image_path)
