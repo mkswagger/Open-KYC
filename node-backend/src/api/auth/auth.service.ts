@@ -13,8 +13,8 @@ export const handleSignUp = async (data: Signup) => {
     const saltRounds = 10;
     const hash = await bcrypt.hash(data.password, saltRounds);
 
-    const phoneOtp = Math.floor(100000 + Math.random() * 900000);
-    const emailOtp = Math.floor(100000 + Math.random() * 900000);
+    const phoneOtp = Math.floor(100000 + Math.random() * 900000) + "";
+    const emailOtp = Math.floor(100000 + Math.random() * 900000) + "";
     const otpCollection = await (await database()).collection('otp');
     await otpCollection.insertOne({ device: data.phone, otp: phoneOtp, createdAt: new Date() });
     await otpCollection.insertOne({ device: data.email, otp: emailOtp, createdAt: new Date() });
@@ -78,7 +78,7 @@ export const handleForgotPassword = async (data: ForgotPassword) => {
 
 export const handleSendOTP = async (device: string) => {
     const otpCollection = await (await database()).collection('otp');
-    const otp = Math.floor(100000 + Math.random() * 900000);
+    const otp = Math.floor(100000 + Math.random() * 900000) + "";
     const otpData = await otpCollection.findOne({ device });
     if (otpData) {
         if (new Date().getTime() - otpData.createdAt.getTime() < 60000) {
