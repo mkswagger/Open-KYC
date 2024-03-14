@@ -23,7 +23,7 @@ EXTRACTED_FACE_IMAGE = "scripts/extracted_face_image"
 COMPARISON_IMAGE = "scripts/comparison_image"
 PANCARD_IMAGE = "scripts/pancard_image"
 SIGNATURE_IMAGE = "scripts/signature_image"
-PASSPORT_SIZE_IMAGE = "scripts/passport_sizee_image"
+PASSPORT_SIZE_IMAGE = "scripts/passport_size_image"
 
 @app.route('/')
 def index():
@@ -42,8 +42,6 @@ def aadhar_upload():
 
         qr_data = decode_qr_opencv(file_path)
         check_face_extraction = extract_adhaar_face(file_path, EXTRACTED_FACE_IMAGE)
-        extract_and_store_embedding(os.path.join(EXTRACTED_FACE_IMAGE, 'extracted_face.jpg'))
-        check_face_matching = compare_faces(os.path.join(EXTRACTED_FACE_IMAGE, 'extracted_face.jpg'), os.path.join(COMPARISON_IMAGE, 'comparison_Img.JPG'))
         check_uid = check_uid_last_4_digits(qr_data, 'XXXXXXXX7743')  # Replace with your actual UID
 
 
@@ -52,7 +50,6 @@ def aadhar_upload():
                 'message': 'Aadhar uploaded and stored successfully and data extracted successfully',
                 'qr_data': qr_data,
                 'face_extraction': check_face_extraction,
-                'face_matching': check_face_matching,
                 'uid_match': check_uid
             })
         else:
@@ -96,9 +93,31 @@ def signature_upload():
     else:
         return jsonify({'error': 'Invalid file'})
 
+@app.route('/livephoto-upload', methods=['POST'])
+def livephoto_upload():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'})
+    file = request.files['file']
+    # Do something with the uploaded signature file
+    #return jsonify({'message': 'Signature uploaded successfully'})
+    if file.filename != '':  # Check if filename is not empty
+        file_path = os.path.join(COMPARISON_IMAGE, file.filename)
+        file.save(file_path)
+
+        extract_and_store_embedding(file_path)
+        check_face_matching = compare_faces(EXTRACTED_FACE_IMAGE + "/extracted_face.jpg", file_path)
+
+        return jsonify({
+            'message': 'Live photo uploaded and stored successfully',
+            'face_matching': check_face_matching
+            })
+    else:
+        return jsonify({'error': 'Invalid file'})
+    
 
 @app.route('/passport-photo-upload', methods=['POST'])
 def passport_photo_upload():
+    global COMPARISON_IMAGE
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
     file = request.files['file']
@@ -107,7 +126,14 @@ def passport_photo_upload():
     if file.filename != '':  # Check if filename is not empty
         file_path = os.path.join(PASSPORT_SIZE_IMAGE, file.filename)
         file.save(file_path)
-        return jsonify({'message': 'Passport Picture uploaded and stored successfully'})
+
+        extract_and_store_embedding(file_path)
+        check_face_matching = compare_faces(file_path, COMPARISON_IMAGE + "/live_photo.jpg")
+
+        return jsonify({
+            'message': 'Passport photo uploaded and stored successfully',
+            'face_matching': check_face_matching
+            })
     else:
         return jsonify({'error': 'Invalid file'})
 
