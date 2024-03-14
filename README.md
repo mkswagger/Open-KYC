@@ -1,4 +1,4 @@
-# Online Video KYC Reimagined by Team Heisenberg for Standard Chartered Hackathon
+# Online Video KYC Reimagined by Team Heisenberg for Standard Chartered Hackathon 🦅
 
 Demo Video: https://drive.google.com/drive/folders/1vfgIEMfdXxdp41B77mLVfhBo-ZsPig0h
 
