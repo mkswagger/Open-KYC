@@ -17,9 +17,8 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
-  phone: z
-    .string()
-    .length(13, { message: "Phone number must be 13 characters." }),
+  phone: z.string().length(13, { message: "Phone number must be 13 characters." }),
+  dob: z.string().regex(/^\d{2}-\d{2}-\d{4}$/, { message: "Invalid date format. Please use DD-MM-YYYY." }),
 });
 
 export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
@@ -29,12 +28,13 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
       email: "",
       password: "",
       phone: "",
+      dob: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,6 +45,9 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
       if (!response.ok) {
         throw new Error("Failed to submit form");
       }
+
+      localStorage.setItem("email", values.email);
+      localStorage.setItem("phone", values.phone);
 
       // Handle success response
       console.log("Form submitted successfully");
@@ -103,6 +106,18 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
                   placeholder="Enter your password"
                   {...field}
                 />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="dob"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Date of Birth (DD-MM-YYYY)</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter your date of birth" {...field} />
               </FormControl>
             </FormItem>
           )}

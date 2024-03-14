@@ -25,12 +25,12 @@ export class Signup {
 
 export const verifyPhoneSchema = z.object({
     phone: z.string().min(13).max(13).regex(/^\+?\d{12}$/),
-    otp: z.number().min(100000).max(999999),
+    otp: z.string().min(6).max(6),
 });
 
 export class VerifyPhone {
     phone: string;
-    otp: number;
+    otp: string;
 
     constructor(data: z.infer<typeof verifyPhoneSchema>) {
         this.phone = data.phone;
@@ -40,12 +40,12 @@ export class VerifyPhone {
 
 export const verifyEmailSchema = z.object({
     email: z.string().email(),
-    otp: z.number().min(100000).max(999999),
+    otp: z.string().min(6).max(6),
 });
 
 export class VerifyEmail {
     email: string;
-    otp: number;
+    otp: string;
 
     constructor(data: z.infer<typeof verifyEmailSchema>) {
         this.email = data.email;
