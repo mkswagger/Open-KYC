@@ -24,10 +24,12 @@ def extract_adhaar_face(aadhar_image_path, extracted_face_path):
         x, y, w, h = faces[0] 
         face_roi = image[y:y+h, x:x+w]
         cv2.imwrite(os.path.join(extracted_face_path + "/extracted_face.jpg"), face_roi)
-        print("Face extracted and saved as 'extracted_face.jpg'")
+        # print("Face extracted and saved as 'extracted_face.jpg'")
+        return True
 
     else:
-        print("No faces detected in the Aadhar image.")
+        # print("No faces detected in the Aadhar image.")
+        return False
 
 if __name__ == "__main__":
     aadhar_image_path = "scripts/aadhar_image/aadhar.png"
