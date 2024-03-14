@@ -1,3 +1,8 @@
+import React from 'react';
+import UploadAadhaar from './UploadAadhaar';
+import UploadPan from './UploadPan';
+import UploadPhoto from './UploadPhoto';
+import UploadSignature from './UploadSignature';
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -28,6 +33,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -45,10 +51,6 @@ const formSchema = z.object({
   panCardNumber: z.string().length(10, {
     message: "PAN Card Number must be 10 characters.",
   }),
-  aadhaarCard: z.string(),
-  panCard: z.string(),
-  signature: z.string(),
-  photo: z.string(),
 });
 
 export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => void }) {
@@ -63,13 +65,8 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
       employmentType: "Salaried",
       aadhaarNumber: "",
       panCardNumber: "",
-      aadhaarCard: "",
-      panCard: "",
-      signature: "",
-      photo: "",
     },
   });
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       //   const response = await fetch("/kycDetails", {
@@ -93,221 +90,191 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
   };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-5 w-2/3 mx-auto justify-center my-10"
-      >
-        <div className="flex justify-between w-full">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem className="w-[49%]">
-                <FormLabel>Full Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter your full name" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem className="w-[49%]">
-                <FormLabel>Address</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter your current address" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex items-center justify-between w-full">
-          <FormField
-            control={form.control}
-            name="dob"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Date of birth</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
+    <div className='flex justify-center'>
+      <div className='space-y-10 py-10 w-8/12'>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-5 mx-auto justify-center my-10"
+          >
+            <div className="flex justify-between w-full">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="w-[49%]">
+                    <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
+                      <Input placeholder="Enter your full name" {...field} />
                     </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="w-[49%]">
-                <FormLabel>Email Address</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter your email address" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem className="w-[49%]">
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your current address" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex items-center justify-between w-full">
+              <FormField
+                control={form.control}
+                name="dob"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Date of birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[240px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="w-[49%]">
+                    <FormLabel>Email Address</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your email address" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex items-center justify-between w-full">
+              <FormField
+                control={form.control}
+                name="incomeRange"
+                render={({ field }) => (
+                  <FormItem className="w-[49%]">
+                    <FormLabel>Income Range</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your income range" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="<2L">Less than 2L</SelectItem>
+                        <SelectItem value="2-5L">2-5L</SelectItem>
+                        <SelectItem value="5-10L">5-10L</SelectItem>
+                        <SelectItem value=">10L">Greater than 10L</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="employmentType"
+                render={({ field }) => (
+                  <FormItem className="w-[49%]">
+                    <FormLabel>Employment Type</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your employment type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Salaried">Salaried</SelectItem>
+                        <SelectItem value="Self Employed">Self Employed</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex items-center justify-between w-full">
+              <FormField
+                control={form.control}
+                name="aadhaarNumber"
+                render={({ field }) => (
+                  <FormItem className="w-[49%]">
+                    <FormLabel>Aadhaar Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your Aadhaar Number" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="panCardNumber"
+                render={({ field }) => (
+                  <FormItem className="w-[49%]">
+                    <FormLabel>PAN Card Number</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your PAN Number" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <FormMessage />
+          </form>
+        </Form>
+
+
+        <div className='flex justify-between'>
+          <UploadAadhaar />
+          <UploadPan />
         </div>
-        <div className="flex items-center justify-between w-full">
-          <FormField
-            control={form.control}
-            name="incomeRange"
-            render={({ field }) => (
-              <FormItem className="w-[49%]">
-                <FormLabel>Income Range</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your income range" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="<2L">Less than 2L</SelectItem>
-                    <SelectItem value="2-5L">2-5L</SelectItem>
-                    <SelectItem value="5-10L">5-10L</SelectItem>
-                    <SelectItem value=">10L">Greater than 10L</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="employmentType"
-            render={({ field }) => (
-              <FormItem className="w-[49%]">
-                <FormLabel>Employment Type</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your employment type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Salaried">Salaried</SelectItem>
-                    <SelectItem value="Self Employed">Self Employed</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <div className='flex justify-between'>
+          <UploadPhoto />
+          <UploadSignature />
         </div>
-        <div className="flex items-center justify-between w-full">
-          <FormField
-            control={form.control}
-            name="aadhaarNumber"
-            render={({ field }) => (
-              <FormItem className="w-[49%]">
-                <FormLabel>Aadhaar Number</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter your Aadhaar Number" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="panCardNumber"
-            render={({ field }) => (
-              <FormItem className="w-[49%]">
-                <FormLabel>PAN Card Number</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter your PAN Number" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+        <div>
+          <Button className='w-full'>
+            Next
+          </Button>
         </div>
-        <FormField
-          control={form.control}
-          name="aadhaarCard"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Upload your Aadhaar Card</FormLabel>
-              <FormControl>
-                <Input id="AadharCardPhoto" type="file" />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="panCard"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Upload your PAN Card</FormLabel>
-              <FormControl>
-                <Input id="panCardPhoto" type="file" />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="signature"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Upload your Signature</FormLabel>
-              <FormControl>
-                <Input id="signaturePhoto" type="file" />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="photo"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Upload your Passport Size Photo</FormLabel>
-              <FormControl>
-                <Input id="photo" type="file" />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormMessage />
-        <Button type="submit">Submit and Proceed</Button>
-      </form>
-    </Form>
+      </div>
+    </div>
   );
 }
