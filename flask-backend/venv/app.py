@@ -1,13 +1,22 @@
+
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import shutil
 import os
 import sys
 from easyocr import Reader
-from pan_read import pan_read_data
-
-scripts_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'scripts/'))
+scripts_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'scripts'))
 sys.path.append(scripts_path)
+
+ocr_scripts_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'ocr_scripts'))
+sys.path.append(ocr_scripts_path)
+
+from pan_read import pan_read_data
+from face_extraction_export import extract_adhaar_face
+from face_matching_export import extract_and_store_embedding, compare_faces
+from qr_uid_matching_export import decode_qr_opencv, check_uid_last_4_digits
+
 
 print(sys.path)
 app = Flask(__name__)
@@ -32,12 +41,9 @@ CORS(app)
 
 # ######################################################################################
 
-from face_extraction_export import extract_adhaar_face
-from face_matching_export import extract_and_store_embedding, compare_faces
-from qr_uid_matching_export import decode_qr_opencv, check_uid_last_4_digits
 
 ADHAAR_IMAGE = "scripts/aadhar_image"
-EXTRACTED_FACE_IMAEG = "scripts/extracted_face_image"
+EXTRACTED_FACE_IMAGE = "scripts/extracted_face_image"
 COMPARISON_IMAGE = "scripts/comparison_image"
 PANCARD_IMAGE = "scripts/pancard_image"
 SIGNATURE_IMAGE = "scripts/signature_image"
@@ -57,12 +63,21 @@ def aadhar_upload():
     if file.filename != '':  # Check if filename is not empty
         file_path = os.path.join(ADHAAR_IMAGE, file.filename)
         file.save(file_path)
+
         qr_data = decode_qr_opencv(file_path)
+        check_face_extraction = extract_adhaar_face(file_path, EXTRACTED_FACE_IMAGE)
+        extract_and_store_embedding(os.path.join(EXTRACTED_FACE_IMAGE, 'extracted_face.jpg'))
+        check_face_matching = compare_faces(os.path.join(EXTRACTED_FACE_IMAGE, 'extracted_face.jpg'), os.path.join(COMPARISON_IMAGE, 'comparison_Img.JPG'))
+        check_uid = check_uid_last_4_digits(qr_data, 'XXXXXXXX7743')  # Replace with your actual UID
+
 
         if qr_data:
             return jsonify({
                 'message': 'Aadhar uploaded and stored successfully and data extracted successfully',
-                'qr_data': qr_data
+                'qr_data': qr_data,
+                'face_extraction': check_face_extraction,
+                'face_matching': check_face_matching,
+                'uid_match': check_uid
             })
         else:
             return jsonify({
@@ -100,7 +115,7 @@ def pan_upload():
         return jsonify({'error': 'No file part'})
     file = request.files['file']
     if file.filename != '':  # Check if filename is not empty
-        file_path = os.path.join(PAN_CARD, file.filename)
+        file_path = os.path.join(PANCARD_IMAGE, file.filename)
         file.save(file_path)
         reader = Reader(['en'])
         result = reader.readtext(file_path, detail=0)
