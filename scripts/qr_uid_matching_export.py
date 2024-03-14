@@ -22,7 +22,7 @@ def check_uid_last_4_digits(qr_data, ocr_uid):
         print(f"Error: The last 4 digits of the UID from the QR code ({qr_uid[-4:]}) do not match the OCR UID ({ocr_uid[-4:]}).")
 
 # Example usage
-image_path = 'scripts/qrcode.png'
+image_path = 'scripts/aadhar_image/aadhar.png'
 ocr_uid = 'XXXXXXXX7743'  # Replace with your actual UID
 qr_data= decode_qr_opencv(image_path)
 check_uid_last_4_digits(qr_data, ocr_uid)
