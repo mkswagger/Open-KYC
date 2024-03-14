@@ -81,3 +81,8 @@ Our platform aims to streamline and automate the Video KYC process, making it fa
 ## Conclusion
 
 Our Video KYC Automation Platform aims to revolutionize the KYC process, making it seamless, secure, and compliant while providing a superior user experience. We welcome contributions and feedback from the community to further enhance and improve our platform.
+
+
+
+
+
