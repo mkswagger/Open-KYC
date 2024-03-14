@@ -11,8 +11,12 @@ export default function kyc() {
 
   return (
     <div className="max-w-[1300px] mx-auto sm:p-10 py-10 px-5 min-h-screen">
-      <h1>Welcome to Online KYC</h1>
-      <p>Follow the steps to complete your KYC Process</p>
+      <div className="border-b border-gray-200 pb-5 mb-5">
+        <h1 className="text-2xl font-bold">Welcome to Online KYC</h1>
+        <p className="font-semibold">
+          Follow the steps to complete your KYC Process
+        </p>
+      </div>
       <ol className="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
         <li
           className={`flex md:w-full items-center ${currentStep === 1 ? "text-blue-600 dark:text-blue-500" : "text-gray-500 dark:text-gray-400"} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700`}
@@ -38,7 +42,7 @@ export default function kyc() {
           <span className="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
             <span className="me-2">2</span>
             <span className="hidden sm:inline-flex sm:ms-2">
-              Document Uploads
+              Video Verification
             </span>
           </span>
         </li>
@@ -46,7 +50,7 @@ export default function kyc() {
           className={`flex items-center ${currentStep === 3 ? "text-blue-600 dark:text-blue-500" : "text-gray-500 dark:text-gray-400"}`}
         >
           <span className="me-2">3</span>
-          Confirmation
+          KYC Confirmation
         </li>
       </ol>
 
