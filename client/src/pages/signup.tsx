@@ -32,20 +32,20 @@ export default function SignUpForm() {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const response = await fetch("/kycDetails", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(values),
-            });
+            // const response = await fetch("/kycDetails", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(values),
+            // });
 
-            if (!response.ok) {
-                throw new Error("Failed to submit form");
-            }
-
+            // if (!response.ok) {
+            //     throw new Error("Failed to submit form");
+            // }
             // Handle success response
             console.log("Form submitted successfully");
+            window.location.href = "/otp-verify";
             form.reset();
         } catch (error) {
             console.error("Error submitting form:", error);

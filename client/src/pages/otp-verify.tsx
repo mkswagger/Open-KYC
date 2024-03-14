@@ -76,7 +76,7 @@ export default function OtpVerify() {
         try {
             // Handle success response
             console.log("Form submitted successfully");
-            phoneform.reset();
+            window.location.href = "/dashboard";
         } catch (error) {
             console.error("Error submitting form:", error);
         }
