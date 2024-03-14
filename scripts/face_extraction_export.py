@@ -1,9 +1,9 @@
-from PIL import Image
-from io import BytesIO
-import numpy as np
+# from PIL import Image
+# from io import BytesIO
+# import numpy as np
+# import requests
 import cv2
 import os
-import requests
 
 def extract_adhaar_face(aadhar_image_path, extracted_face_path):    
     # Uncomment to use URL
