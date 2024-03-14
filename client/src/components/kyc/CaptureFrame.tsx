@@ -3,7 +3,7 @@ import WebcamFeed from "@/components/kyc/WebcamFeed";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-const CaptureFrame = ({ onNextStep }) => {
+const CaptureFrame = ({ onNextStep }: { onNextStep: () => void }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [capturedImages, setCapturedImages] = useState({
