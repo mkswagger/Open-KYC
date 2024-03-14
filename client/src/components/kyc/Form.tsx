@@ -270,7 +270,7 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
           <UploadSignature />
         </div>
         <div>
-          <Button className='w-full'>
+          <Button className='w-full' onClick={onNextStep}>
             Next
           </Button>
         </div>
