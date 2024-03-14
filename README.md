@@ -32,13 +32,12 @@ Our platform aims to streamline and automate the Video KYC process, making it fa
 - PAN Photo Verification
 - Signature Verification 
 - Agent Support throughout KYC Process
-
+- Read-aloud Details with Voice Confirmation
+- Multiple Language Support 
 
 ### Future Scope 📈
 
 - Implement a step-by-step follow model for senior citizens
-- Read-aloud Details with Voice Confirmation(future scope)
-- Multiple Language Support (future scope)
 - Continuous improvement of AI algorithms for better accuracy and user experience
 - Integration with additional identity verification methods (e.g., biometrics)
 
