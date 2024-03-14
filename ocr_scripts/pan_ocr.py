@@ -38,17 +38,21 @@ def ExtractDetails(image_path):
         print(f'{y_}Blurry Image for tesseract. Input new clear image for viewing pan card number !!!')
         print(Style.RESET_ALL)
     else:
-        print("Pan Card Number : ", regex_num.findall(text)[0])
+        pass
+    #     print("Pan Card Number : ", regex_num.findall(text)[0])
         
-    print('=================================')
+    # print('=================================')
     
     if len(regex_DOB.findall(text)) == 0:
         print(f'{y_}Blurry Image for tesseract. Input new clear image for viewing DATE OF BIRTH !!!')
         print(Style.RESET_ALL)
     else:
-        print("DATE OF BIRTH :   ", regex_DOB.findall(text)[0])
+        pass
+    #     print("DATE OF BIRTH :   ", regex_DOB.findall(text)[0])
         
-    print('=================================')
+    # print('=================================')
 
+    result = [regex_num.findall(text)[0], regex_DOB.findall(text)[0]]
+    return result
 
-ExtractDetails('pancard_try.jpeg')
+ExtractDetails('ocr_scripts/pancard_try.jpeg')
