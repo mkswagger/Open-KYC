@@ -86,9 +86,9 @@ const CaptureFrame = ({ onNextStep }) => {
       setTitle("Take a PAN Card Photograph");
       setSubtitle("Position your PAN Card inside the rectangle for photo");
     } else if (currentFrame === "pan") {
-      setCurrentFrame("sign");
-      setTitle("Take a Signature Photograph");
-      setSubtitle("Position your signature inside the rectangle for photo");
+      setCurrentFrame("aadhar");
+      setTitle("Take a Aadhaar Photograph");
+      setSubtitle("Position your Aadhaar inside the rectangle for photo");
     } else {
       // Reached the end, handle saving or navigation logic here
       console.log("All frames captured:", capturedImages);

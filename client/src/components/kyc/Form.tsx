@@ -48,9 +48,10 @@ const formSchema = z.object({
   aadhaarCard: z.string(),
   panCard: z.string(),
   signature: z.string(),
+  photo: z.string(),
 });
 
-export default function PersonalDetailsForm({ onNextStep }) {
+export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => void }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -65,6 +66,7 @@ export default function PersonalDetailsForm({ onNextStep }) {
       aadhaarCard: "",
       panCard: "",
       signature: "",
+      photo: "",
     },
   });
 
@@ -287,6 +289,18 @@ export default function PersonalDetailsForm({ onNextStep }) {
               <FormLabel>Upload your Signature</FormLabel>
               <FormControl>
                 <Input id="signaturePhoto" type="file" />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="photo"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Upload your Passport Size Photo</FormLabel>
+              <FormControl>
+                <Input id="photo" type="file" />
               </FormControl>
             </FormItem>
           )}
