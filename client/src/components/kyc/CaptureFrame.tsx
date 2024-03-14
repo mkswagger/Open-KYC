@@ -58,6 +58,7 @@ const CaptureFrame = ({ onNextStep }) => {
 
   const handleCapture = () => {
     captureImage(currentFrame);
+    setShowLoader(true);
   };
 
   const handleRetake = () => {
@@ -97,6 +98,19 @@ const CaptureFrame = ({ onNextStep }) => {
     }
   };
 
+  const [showLoader, setShowLoader] = useState(true); // State to track whether to show the loader or not
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false); // After 5 seconds, hide the loader
+    }, 7000);
+
+    // Clean up the timer to prevent memory leaks
+    return () => clearTimeout(timer);
+  }, [
+    showLoader
+  ]); // Run this effect only once, similar to componentDidMount
+
   return (
     <div className="text-center w-[600px] mx-auto my-10 p-5">
       <h2 className="text-xl font-semibold">{title}</h2>
@@ -123,13 +137,20 @@ const CaptureFrame = ({ onNextStep }) => {
               >
                 Retake
               </Button>
-              <Button
-                onClick={handleSaveAndContinue}
-                variant="outline"
-                className="action-button ml-2"
-              >
-                Save and continue
-              </Button>
+              {showLoader ? ( // Show loader if showLoader is true
+                <div className="loader py-2">
+                  Please wait, processing...
+                </div>
+              ) : (
+                <Button
+                  onClick={handleSaveAndContinue}
+                  variant="outline"
+                  className="action-button ml-2"
+                >
+                  Save and continue
+                </Button>
+
+              )}
             </div>
           ) : (
             <Button
@@ -139,8 +160,14 @@ const CaptureFrame = ({ onNextStep }) => {
             >
               Capture Frame
             </Button>
+
           )}
+
         </div>
+        {
+          !showLoader && capturedImages[currentFrame] ? <div className="loader py-2">Image Matched Succesfully</div> : <div>
+          </div>
+        }
       </div>
     </div>
   );
