@@ -3,6 +3,13 @@
 Demo Video: https://drive.google.com/drive/folders/1vfgIEMfdXxdp41B77mLVfhBo-ZsPig0h
 
 
+
+
+![Presentation Video](https://github.com/mkswagger/Online_KYC_Team_Heisenberg/assets/75358720/4f642045-2229-4c04-bf62-e887f1986adc)
+
+
+
+
 ## Problem Statement 🛠️
 
 Currently, Know Your Customer (KYC) processes are predominantly offline or non-interactive online processes. These methods are often manual, cumbersome, and lack user engagement. They can be particularly challenging for users with limited financial resources or education levels. Additionally, existing processes may not be inclusive across languages and generations.
