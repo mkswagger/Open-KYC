@@ -27,12 +27,30 @@ const Value = styled.span`
   margin-left: 10px;
 `;
 
-export default function AadhaarVerification({ onNextStep }: { onNextStep: () => void }) {
-  const onSubmit = () => {
-    onNextStep();
+export default function AadhaarVerification({
+  onNextStep,
+}: {
+  onNextStep: () => void;
+}) {
+  const speakMessage = (message) => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      const speech = new SpeechSynthesisUtterance();
+      speech.text = message;
+      speech.volume = 1;
+      speech.rate = 1;
+      speech.pitch = 1;
+      window.speechSynthesis.speak(speech);
+    }
   };
 
-  const data = JSON.parse(localStorage.getItem('aadhar-data') || '{}');
+  const onSubmit = () => {
+    onNextStep();
+    speakMessage(
+      "Position your face in the center of the frame and click the capture button to take a picture of your face. After capturing the picture, proceed to the next step."
+    );
+  };
+
+  const data = JSON.parse(localStorage.getItem("aadhar-data") || "{}");
 
   return (
     <AadhaarContainer>
@@ -87,7 +105,9 @@ export default function AadhaarVerification({ onNextStep }: { onNextStep: () => 
           <Value>{data.pincode}</Value>
         </Field>
       </AadhaarDetails>
-      <Button className="my-10" onClick={onSubmit}>Verify & Continue</Button>
+      <Button className="my-10" onClick={onSubmit}>
+        Verify & Continue
+      </Button>
     </AadhaarContainer>
   );
 }

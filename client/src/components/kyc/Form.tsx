@@ -1,8 +1,8 @@
-import React from 'react';
-import UploadAadhaar from './UploadAadhaar';
-import UploadPan from './UploadPan';
-import UploadPhoto from './UploadPhoto';
-import UploadSignature from './UploadSignature';
+import { useEffect, useRef } from "react";
+import UploadAadhaar from "./UploadAadhaar";
+import UploadPan from "./UploadPan";
+import UploadPhoto from "./UploadPhoto";
+import UploadSignature from "./UploadSignature";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -33,7 +33,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -53,7 +52,11 @@ const formSchema = z.object({
   }),
 });
 
-export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => void }) {
+export default function PersonalDetailsForm({
+  onNextStep,
+}: {
+  onNextStep: () => void;
+}) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -89,9 +92,73 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
     }
   };
 
+  const recognition = useRef<SpeechRecognition | null>(null);
+
+  useEffect(() => {
+    const handleSpeechRecognition = (event: SpeechRecognitionEvent) => {
+      const lastResult = event.results[event.results.length - 1][0].transcript
+        .trim()
+        .toLowerCase();
+      if (lastResult === "next") {
+        onNextStep();
+      }
+    };
+
+    if ("SpeechRecognition" in window) {
+      recognition.current = new SpeechRecognition();
+      recognition.current.lang = "en-US";
+      recognition.current.continuous = true;
+      recognition.current.interimResults = false;
+      recognition.current.onresult = handleSpeechRecognition;
+    } else {
+      console.error("SpeechRecognition is not supported in this browser.");
+    }
+
+    return () => {
+      if (recognition.current) {
+        recognition.current.stop();
+      }
+    };
+  }, [onNextStep]);
+
+  const startListening = () => {
+    if (recognition.current) {
+      recognition.current.start();
+    }
+  };
+
+  const stopListening = () => {
+    if (recognition.current) {
+      recognition.current.stop();
+    }
+  };
+
+  useEffect(() => {
+    startListening();
+
+    return () => {
+      stopListening();
+    };
+  }, []);
+
+  const speakMessage = (message: string) => {
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = message;
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
+    window.speechSynthesis.speak(speech);
+  };
+
   return (
-    <div className='flex justify-center'>
-      <div className='space-y-10 py-10 w-8/12'>
+    <div className="flex justify-center">
+      <div className="space-y-10 py-10 w-8/12">
+        <h2 className="flex flex-col text-lg font-semibold text-center">
+          <span>Fill your personal details and upload your documents.</span>
+          <span>
+            After completing the form, say next to proceed to the next step.
+          </span>
+        </h2>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -117,14 +184,17 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
                   <FormItem className="w-[49%]">
                     <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your current address" {...field} />
+                      <Input
+                        placeholder="Enter your current address"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
               />
             </div>
             <div className="flex items-center justify-between w-full">
-{/*               <FormField
+              {/*               <FormField
                 control={form.control}
                 name="dob"
                 render={({ field }) => (
@@ -172,7 +242,10 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
                   <FormItem className="w-[49%]">
                     <FormLabel>Email Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your email address" {...field} />
+                      <Input
+                        placeholder="Enter your email address"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -222,7 +295,9 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
                       </FormControl>
                       <SelectContent>
                         <SelectItem value="Salaried">Salaried</SelectItem>
-                        <SelectItem value="Self Employed">Self Employed</SelectItem>
+                        <SelectItem value="Self Employed">
+                          Self Employed
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -238,7 +313,10 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
                   <FormItem className="w-[49%]">
                     <FormLabel>Aadhaar Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your Aadhaar Number" {...field} />
+                      <Input
+                        placeholder="Enter your Aadhaar Number"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -260,17 +338,24 @@ export default function PersonalDetailsForm({ onNextStep }: { onNextStep: () => 
           </form>
         </Form>
 
-
-        <div className='flex justify-between'>
+        <div className="flex justify-between">
           <UploadAadhaar />
           <UploadPan />
         </div>
-        <div className='flex justify-between'>
+        <div className="flex justify-between">
           <UploadPhoto />
           <UploadSignature />
         </div>
         <div>
-          <Button className='w-full' onClick={onNextStep}>
+          <Button
+            className="w-full"
+            onClick={() => {
+              speakMessage(
+                "Verify if your Aadhaar details fetched are correct."
+              );
+              onNextStep();
+            }}
+          >
             Next
           </Button>
         </div>
