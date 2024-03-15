@@ -42,6 +42,13 @@ Our platform aims to streamline and automate the Video KYC process, making it fa
 - Multiple Language Support
 - ChatBot Support
 
+
+### Architecture 🛠️
+
+![WhatsApp Image 2024-03-16 at 01 46 30](https://github.com/mkswagger/Online_KYC_Team_Heisenberg/assets/34826479/73333529-268f-468c-81a8-1e5de3628ef4)
+
+
+
 ### Future Scope 📈
 
 - Implement a step-by-step follow model for senior citizens
