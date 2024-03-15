@@ -1,11 +1,10 @@
 # Online Video KYC Reimagined by Team Heisenberg for Standard Chartered Hackathon 🦅
 
-Demo Video: https://drive.google.com/drive/folders/1vfgIEMfdXxdp41B77mLVfhBo-ZsPig0h
 
 
+https://github.com/mkswagger/Online_KYC_Team_Heisenberg/assets/91051053/f6863b22-2cbc-402c-9a04-b31d99c41a8e
 
 
-![Presentation Video](https://github.com/mkswagger/Online_KYC_Team_Heisenberg/assets/75358720/4f642045-2229-4c04-bf62-e887f1986adc)
 
 
 
