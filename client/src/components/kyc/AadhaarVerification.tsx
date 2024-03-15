@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "../ui/button";
+import "@/components/translations/Translations";
+import { useTranslation } from "react-i18next";
 
 const AadhaarContainer = styled.div`
   text-align: center;
@@ -32,6 +34,7 @@ export default function AadhaarVerification({
 }: {
   onNextStep: () => void;
 }) {
+  const { t } = useTranslation();
   const speakMessage = (message) => {
     if (typeof window !== "undefined" && window.speechSynthesis) {
       const speech = new SpeechSynthesisUtterance();
@@ -55,7 +58,7 @@ export default function AadhaarVerification({
   return (
     <AadhaarContainer>
       <h2 className="text-lg font-semibold mb-4">
-        Here are the details we fetched from your Aadhaar card:
+        {t("Here are the details we fetched from your Aadhaar card:")}
       </h2>
       <AadhaarDetails>
         <Field>
@@ -108,7 +111,7 @@ export default function AadhaarVerification({
         </Field>
       </AadhaarDetails>
       <Button className="my-10 bg-blue-600" onClick={onSubmit}>
-        Verify & Continue
+        {t("Verify & Continue")}
       </Button>
     </AadhaarContainer>
   );

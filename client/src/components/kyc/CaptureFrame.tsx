@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import WebcamFeed from "@/components/kyc/WebcamFeed";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import "@/components/translations/Translations";
+import { useTranslation } from "react-i18next";
 
 const CaptureFrame = ({ onNextStep }) => {
+  const { t } = useTranslation();
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [capturedImages, setCapturedImages] = useState({
@@ -153,7 +156,7 @@ const CaptureFrame = ({ onNextStep }) => {
                 variant="outline"
                 className="action-button mr-2"
               >
-                Retake
+                {t("Retake")}
               </Button>
               {showLoader ? ( // Show loader if showLoader is true
                 <div className="loader py-2">Please wait, processing...</div>
@@ -163,7 +166,7 @@ const CaptureFrame = ({ onNextStep }) => {
                   variant="outline"
                   className="action-button ml-2 bg-green-400"
                 >
-                  Save and continue
+                  {t("Save and continue")}
                 </Button>
               )}
             </div>
@@ -173,13 +176,13 @@ const CaptureFrame = ({ onNextStep }) => {
               variant="outline"
               className="action-button text-white bg-blue-600"
             >
-              Capture Frame
+              {t("Capture Frame")}
             </Button>
           )}
         </div>
         {!showLoader && capturedImages[currentFrame] ? (
           <div className="loader font-semibold text-md my-4">
-            Image Matched Succesfully
+            {t("Image Matched Succesfully")}
           </div>
         ) : (
           <div></div>

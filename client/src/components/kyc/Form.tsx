@@ -32,6 +32,8 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import "@/components/translations/Translations";
+import { useTranslation } from "react-i18next";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -70,6 +72,7 @@ export default function PersonalDetailsForm({
       panCardNumber: "",
     },
   });
+  const { t } = useTranslation();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       //   const response = await fetch("/kycDetails", {
@@ -154,9 +157,13 @@ export default function PersonalDetailsForm({
     <div className="flex justify-center">
       <div className="space-y-10 py-10 w-8/12">
         <h2 className="flex flex-col text-md font-semibold text-center border border-green-300 bg-green-300/10 hover:bg-green-300/20 hover:border-green-300 transition ease-in-out duration-500 hover:transition hover:ease-in-out hover:duration-500 rounded-lg p-3 w-max mx-auto">
-          <span>Fill your personal details and upload your documents.</span>
           <span>
-            After completing the form, say next to proceed to the next step.
+            {t("Fill your personal details and upload your documents.")}
+          </span>
+          <span>
+            {t(
+              "After completing the form, say next to proceed to the next step."
+            )}
           </span>
         </h2>
         <Form {...form}>
@@ -170,9 +177,12 @@ export default function PersonalDetailsForm({
                 name="name"
                 render={({ field }) => (
                   <FormItem className="w-[49%]">
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>{t("Full Name")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your full name" {...field} />
+                      <Input
+                        placeholder={t("Enter your full name")}
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -182,10 +192,10 @@ export default function PersonalDetailsForm({
                 name="address"
                 render={({ field }) => (
                   <FormItem className="w-[49%]">
-                    <FormLabel>Address</FormLabel>
+                    <FormLabel>{t("Address")}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter your current address"
+                        placeholder={t("Enter your current address")}
                         {...field}
                       />
                     </FormControl>
@@ -194,56 +204,15 @@ export default function PersonalDetailsForm({
               />
             </div>
             <div className="flex items-center justify-between w-full">
-              {/*               <FormField
-                control={form.control}
-                name="dob"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>Date of birth</FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant={"outline"}
-                            className={cn(
-                              "w-[240px] pl-3 text-left font-normal",
-                              !field.value && "text-muted-foreground"
-                            )}
-                          >
-                            {field.value ? (
-                              format(field.value, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                          }
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem className="w-[49%]">
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel>{t("Email Address")}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter your email address"
+                        placeholder={t("Enter your email address")}
                         {...field}
                       />
                     </FormControl>
@@ -257,21 +226,25 @@ export default function PersonalDetailsForm({
                 name="incomeRange"
                 render={({ field }) => (
                   <FormItem className="w-[49%]">
-                    <FormLabel>Income Range</FormLabel>
+                    <FormLabel>{t("Income Range")}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select your income range" />
+                          <SelectValue
+                            placeholder={t("Select your income range")}
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="<2L">Less than 2L</SelectItem>
+                        <SelectItem value="<2L">{t("Less than 2L")}</SelectItem>
                         <SelectItem value="2-5L">2-5L</SelectItem>
                         <SelectItem value="5-10L">5-10L</SelectItem>
-                        <SelectItem value=">10L">Greater than 10L</SelectItem>
+                        <SelectItem value=">10L">
+                          {t("Greater than 10L")}
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -283,20 +256,24 @@ export default function PersonalDetailsForm({
                 name="employmentType"
                 render={({ field }) => (
                   <FormItem className="w-[49%]">
-                    <FormLabel>Employment Type</FormLabel>
+                    <FormLabel>{t("Employment Type")}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select your employment type" />
+                          <SelectValue
+                            placeholder={t("Select your employment type")}
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="Salaried">Salaried</SelectItem>
+                        <SelectItem value="Salaried">
+                          {t("Salaried")}
+                        </SelectItem>
                         <SelectItem value="Self Employed">
-                          Self Employed
+                          {t("Self Employed")}
                         </SelectItem>
                       </SelectContent>
                     </Select>
@@ -311,10 +288,10 @@ export default function PersonalDetailsForm({
                 name="aadhaarNumber"
                 render={({ field }) => (
                   <FormItem className="w-[49%]">
-                    <FormLabel>Aadhaar Number</FormLabel>
+                    <FormLabel>{t("Aadhaar Number")}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter your Aadhaar Number"
+                        placeholder={t("Enter your Aadhaar Number")}
                         {...field}
                       />
                     </FormControl>
@@ -326,9 +303,12 @@ export default function PersonalDetailsForm({
                 name="panCardNumber"
                 render={({ field }) => (
                   <FormItem className="w-[49%]">
-                    <FormLabel>PAN Card Number</FormLabel>
+                    <FormLabel>{t("PAN Card Number")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your PAN Number" {...field} />
+                      <Input
+                        placeholder={t("Enter your PAN Number")}
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -351,12 +331,12 @@ export default function PersonalDetailsForm({
             className="w-full bg-blue-600"
             onClick={() => {
               speakMessage(
-                "Verify if your Aadhaar details fetched are correct."
+                t("Verify if your Aadhaar details fetched are correct.")
               );
               onNextStep();
             }}
           >
-            Next
+            {t("Next")}
           </Button>
         </div>
       </div>

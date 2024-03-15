@@ -3,9 +3,13 @@ import Form from "@/components/kyc/Form";
 import CaptureFrame from "@/components/kyc/CaptureFrame";
 import VerifyAndComplete from "@/components/kyc/VerifyAndComplete";
 import AadhaarVerification from "@/components/kyc/AadhaarVerification";
+import TranslateButton from "@/components/translations/TranslateButton";
+import "@/components/translations/Translations";
+import { useTranslation } from "react-i18next";
 
 export default function KYC() {
   const [currentStep, setCurrentStep] = useState(1);
+  const { t } = useTranslation();
 
   const handleNextStep = () => {
     setCurrentStep(currentStep + 1);
@@ -35,10 +39,11 @@ export default function KYC() {
 
   return (
     <div className="max-w-[1300px] mx-auto sm:p-10 py-10 px-5 min-h-screen">
+      <TranslateButton />
       <div className="border-b border-gray-200 pb-5 mb-5">
-        <h1 className="text-2xl font-bold">Welcome to Online KYC</h1>
+        <h1 className="text-2xl font-bold">{t("Welcome to Online KYC")}</h1>
         <p className="font-semibold">
-          Follow the steps to complete your KYC Process
+          {t("Follow the steps to complete your KYC Process")}
         </p>
       </div>
       <ol className="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
@@ -56,7 +61,7 @@ export default function KYC() {
               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
             </svg>
             <span className="hidden sm:inline-flex sm:ms-2">
-              Personal Details
+              {t("Personal Details")}
             </span>
           </span>
         </li>
@@ -66,7 +71,7 @@ export default function KYC() {
           <span className="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
             <span className="me-2">2</span>
             <span className="hidden sm:inline-flex sm:ms-2">
-              Aadhaar Verification
+              {t("Aadhaar Verification")}
             </span>
           </span>
         </li>
@@ -76,7 +81,7 @@ export default function KYC() {
           <span className="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
             <span className="me-2">3</span>
             <span className="hidden sm:inline-flex sm:ms-2">
-              Video Verification
+              {t("Video Verification")}
             </span>
           </span>
         </li>
@@ -84,13 +89,13 @@ export default function KYC() {
           className={`flex items-center ${currentStep === 3 ? "text-blue-600 dark:text-blue-500" : "text-gray-500 dark:text-gray-400"}`}
         >
           <span className="me-2">4</span>
-          KYC Confirmation
+          {t("KYC Confirmation")}
         </li>
       </ol>
 
-      {currentStep === 1 && <Form onNextStep={handleNextStep} />}
-      {currentStep === 2 && <AadhaarVerification onNextStep={handleNextStep} />}
-      {currentStep === 3 && <CaptureFrame onNextStep={handleNextStep} />}
+      {currentStep === 2 && <Form onNextStep={handleNextStep} />}
+      {currentStep === 3 && <AadhaarVerification onNextStep={handleNextStep} />}
+      {currentStep === 1 && <CaptureFrame onNextStep={handleNextStep} />}
       {currentStep === 4 && <VerifyAndComplete />}
       {/* <button
         className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
