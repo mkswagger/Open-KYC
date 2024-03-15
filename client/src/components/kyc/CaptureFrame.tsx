@@ -165,7 +165,7 @@ const CaptureFrame = ({ onNextStep }) => {
 
         </div>
         {
-          !showLoader && capturedImages[currentFrame] ? <div className="loader py-2">Image Matched Succesfully</div> : <div>
+          !showLoader && capturedImages[currentFrame] ? <div className="loader py-2">Image Captured</div> : <div>
           </div>
         }
       </div>
