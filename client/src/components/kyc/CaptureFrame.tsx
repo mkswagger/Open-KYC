@@ -161,7 +161,7 @@ const CaptureFrame = ({ onNextStep }) => {
                 <Button
                   onClick={handleSaveAndContinue}
                   variant="outline"
-                  className="action-button ml-2"
+                  className="action-button ml-2 bg-green-400"
                 >
                   Save and continue
                 </Button>
@@ -171,14 +171,16 @@ const CaptureFrame = ({ onNextStep }) => {
             <Button
               onClick={handleCapture}
               variant="outline"
-              className="action-button"
+              className="action-button text-white bg-blue-600"
             >
               Capture Frame
             </Button>
           )}
         </div>
         {!showLoader && capturedImages[currentFrame] ? (
-          <div className="loader py-2">Image Matched Succesfully</div>
+          <div className="loader font-semibold text-md my-4">
+            Image Matched Succesfully
+          </div>
         ) : (
           <div></div>
         )}

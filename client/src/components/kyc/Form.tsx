@@ -153,7 +153,7 @@ export default function PersonalDetailsForm({
   return (
     <div className="flex justify-center">
       <div className="space-y-10 py-10 w-8/12">
-        <h2 className="flex flex-col text-lg font-semibold text-center">
+        <h2 className="flex flex-col text-md font-semibold text-center border border-green-300 bg-green-300/10 hover:bg-green-300/20 hover:border-green-300 transition ease-in-out duration-500 hover:transition hover:ease-in-out hover:duration-500 rounded-lg p-3 w-max mx-auto">
           <span>Fill your personal details and upload your documents.</span>
           <span>
             After completing the form, say next to proceed to the next step.
@@ -348,7 +348,7 @@ export default function PersonalDetailsForm({
         </div>
         <div>
           <Button
-            className="w-full"
+            className="w-full bg-blue-600"
             onClick={() => {
               speakMessage(
                 "Verify if your Aadhaar details fetched are correct."

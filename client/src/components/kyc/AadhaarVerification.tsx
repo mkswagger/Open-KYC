@@ -54,7 +54,9 @@ export default function AadhaarVerification({
 
   return (
     <AadhaarContainer>
-      <h2>Here are the details we fetched from your Aadhaar card:</h2>
+      <h2 className="text-lg font-semibold mb-4">
+        Here are the details we fetched from your Aadhaar card:
+      </h2>
       <AadhaarDetails>
         <Field>
           <Label>UID:</Label>
@@ -105,7 +107,7 @@ export default function AadhaarVerification({
           <Value>{data.pincode}</Value>
         </Field>
       </AadhaarDetails>
-      <Button className="my-10" onClick={onSubmit}>
+      <Button className="my-10 bg-blue-600" onClick={onSubmit}>
         Verify & Continue
       </Button>
     </AadhaarContainer>

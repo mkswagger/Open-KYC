@@ -16,7 +16,7 @@ export default function VerifyAndComplete() {
       <p className="text-md">
         Your KYC Status will be updated after inspection.
       </p>
-      <Button asChild className="mt-6">
+      <Button asChild className="mt-6 bg-blue-600">
         <Link href="/dashboard">Return to Dashboard</Link>
       </Button>
     </div>

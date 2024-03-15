@@ -5,8 +5,8 @@ import Image from "next/image";
 import { SlMenu } from "react-icons/sl";
 import { BsBell } from "react-icons/bs";
 import { PiPenNibBold, PiArrowBendDoubleUpLeftDuotone } from "react-icons/pi";
-
-import me from "/public/assets/me.jpg";
+import logo from "/public/sc-logo.png";
+import { FaRegUserCircle } from "react-icons/fa";
 
 export default function Navbar() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -35,8 +35,11 @@ export default function Navbar() {
   return (
     <header>
       <nav className="flex justify-between items-end border-b border-black/20 sm:pb-5 pb-3">
-        <div className="flex items-end">
-          <h3 className="text-2xl font-bold mr-2">OpenKYC</h3>
+        <div className="flex items-center">
+          <h3 className="flex items-end text-2xl font-bold mr-2">
+            <Image src={logo} alt="me" width={40} height={40} />
+            OpenKYC
+          </h3>
           {/* <ul className="hidden md:flex mb-[3px]">
             {links.map((link, index) => (
               <Link
@@ -49,7 +52,9 @@ export default function Navbar() {
             ))}
           </ul> */}
         </div>
-        <div className="bg-black rounded-full p-5"></div>
+        <div className=" rounded-full">
+          <FaRegUserCircle size={30} />
+        </div>
       </nav>
       {/* <div
         className={`${showMenu ? "md:hidden left-0 transition ease-in duration-500" : "left-0 -translate-x-[700px] transition ease-out duration-500"} fixed z-20 top-0 flex justify-center items-center h-screen bg-white text-black rounded-l-md shadow-2xl min-h-screen sm:w-[385px] w-full`}

@@ -49,13 +49,15 @@ export default function Dashboard() {
     <div className="max-w-[1300px] mx-auto sm:p-10 py-10 px-5 min-h-screen">
       <Navbar />
       <main>
-        <div className="flex flex-col items-center my-40">
-          <h2 className="text-2xl font-semibold mb-4">KYC Process Explained</h2>
-          <div className="flex flex-wrap justify-between mb-4">
+        <div className="flex flex-col items-center my-32">
+          <h2 className="text-2xl font-semibold mb-4 underline underline-offset-2 decoration-green-400">
+            KYC Process Explained
+          </h2>
+          <div className="flex flex-wrap justify-between mb-8">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="max-w-[280px] border border-accent-2 bg-accent-2/10 hover:bg-accent-2/20 hover:border-accent-2 transition ease-in-out duration-500 hover:transition hover:ease-in-out hover:duration-500 rounded-lg p-5 mx-2 "
+                className="max-w-[280px] border border-green-300 bg-green-300/10 hover:bg-green-300/20 hover:border-green-300 transition ease-in-out duration-500 hover:transition hover:ease-in-out hover:duration-500 rounded-lg p-5 mx-2 "
               >
                 <h4 className="text-xl font-bold mb-1">{service.heading}</h4>
                 <p>{service.description}</p>
@@ -65,7 +67,9 @@ export default function Dashboard() {
           <section>
             <div></div>
             <Button asChild onClick={startVoice}>
-              <Link href="/kyc">Start your KYC</Link>
+              <Link href="/kyc" className="bg-blue-600">
+                Start your KYC
+              </Link>
             </Button>
           </section>
         </div>
