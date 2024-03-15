@@ -93,10 +93,10 @@ export default function KYC() {
         </li>
       </ol>
 
-      {currentStep === 2 && <Form onNextStep={handleNextStep} />}
-      {currentStep === 3 && <AadhaarVerification onNextStep={handleNextStep} />}
-      {currentStep === 4 && <CaptureFrame onNextStep={handleNextStep} />}
-      {currentStep === 1 && <VerifyAndComplete />}
+      {currentStep === 1 && <Form onNextStep={handleNextStep} />}
+      {currentStep === 2 && <AadhaarVerification onNextStep={handleNextStep} />}
+      {currentStep === 3 && <CaptureFrame onNextStep={handleNextStep} />}
+      {currentStep === 4 && <VerifyAndComplete />}
       {/* <button
         className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
         onClick={startVoice}
