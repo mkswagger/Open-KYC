@@ -3,6 +3,7 @@ import { AnimatedTooltipPreview } from "@/components/landing/Avatars";
 import { LandingPage } from "@/components/landing/Landing";
 import SignUp from "@/components/auth/SignUp";
 import VerifyOTP from "@/components/auth/VerifyOTP";
+import CrispChat from "@/components/CrispChat";
 
 export default function Home() {
   const [signedUp, setSignedUp] = useState(false);
@@ -26,6 +27,8 @@ export default function Home() {
       <div className="w-[50%]">
         {!signedUp ? <SignUp onSuccess={handleSignUpSuccess} /> : <VerifyOTP />}
       </div>
+      <CrispChat websiteId="fdd574d2-7cd3-4841-b41d-030f50ad3aeb" />
     </div>
+
   );
 }

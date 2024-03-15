@@ -39,7 +39,8 @@ Our platform aims to streamline and automate the Video KYC process, making it fa
 - Signature Verification 
 - Agent Support throughout KYC Process
 - Read-aloud Details with Voice Confirmation
-- Multiple Language Support 
+- Multiple Language Support
+- ChatBot Support
 
 ### Future Scope 📈
 
@@ -50,10 +51,10 @@ Our platform aims to streamline and automate the Video KYC process, making it fa
 ## Team Members
 
 - Aryan Raj (ML and Backend Developer)
-- Divyanshu Yadav (Full Stack developer)
+- Divyanshu Yadav (Full Stack Developer)
 - Puranjay Bhargava(ML and Backend Developer)
-- Kevin Paul Jacob(Full Stack Developer)
-- Mathangy K(ML developer)
+- Kevin Paul Jacob (Full Stack Developer)
+- Mathangy K (ML Developer)
 - Mohammad Sami (Full Stack Developer)
 
 ## Tech Stack 💻
@@ -63,6 +64,7 @@ Our platform aims to streamline and automate the Video KYC process, making it fa
 - Next.js
 - WebRTC for real-time video communication
 - Shadcn
+- Crisp Customer Support
 
 
 ### Backend 🐐
@@ -70,7 +72,9 @@ Our platform aims to streamline and automate the Video KYC process, making it fa
 - Python with Flask for RESTful API development
 - Express.js
 - NOde.js
-- MongoDB 
+- MongoDB
+- TypeScript
+- MDN Web API
 
 
 ### Machine Learning 🧠
