@@ -38,6 +38,9 @@ dependencies:
   clsx:
     specifier: ^2.1.0
     version: 2.1.0
+  crisp-chat:
+    specifier: ^1.0.0
+    version: 1.0.0
   date-fns:
     specifier: ^3.4.0
     version: 3.4.0
@@ -1832,6 +1835,11 @@ packages:
       parse-json: 5.2.0
       path-type: 4.0.0
       typescript: 5.4.2
+    dev: false
+
+  /crisp-chat@1.0.0:
+    resolution: {integrity: sha512-QXVZ/XiVQ5CDCr70J6zht08MczgRuFw3eWxNC5v+TF19pGirN5h4BfHknOEZefKwZmKj1BSHr5mmhxsOxUGoEQ==}
+    deprecated: Package no longer supported. Contact support@npmjs.com for more info.
     dev: false
 
   /cross-spawn@7.0.3:
