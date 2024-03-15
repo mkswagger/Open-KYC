@@ -1,15 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "@/components/kyc/Form";
 import CaptureFrame from "@/components/kyc/CaptureFrame";
 import VerifyAndComplete from "@/components/kyc/VerifyAndComplete";
 import AadhaarVerification from "@/components/kyc/AadhaarVerification";
 
-export default function kyc() {
+export default function KYC() {
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleNextStep = () => {
     setCurrentStep(currentStep + 1);
   };
+
+  // useEffect(() => {
+  //   if (currentStep === 1) {
+  //     speakMessage("Fill your personal details and upload your documents");
+  //   }
+  // }, [currentStep]);
+
+  // const speakMessage = (message) => {
+  //   if (typeof window !== "undefined" && window.speechSynthesis) {
+  //     const speech = new SpeechSynthesisUtterance();
+  //     speech.text = message;
+  //     speech.volume = 1;
+  //     speech.rate = 1;
+  //     speech.pitch = 1;
+  //     window.speechSynthesis.speak(speech);
+  //   }
+  // };
+
+  // const startVoice = () => {
+  //   // Manually start the voice synthesis
+  //   speakMessage("Fill your personal details and upload your documents");
+  // };
 
   return (
     <div className="max-w-[1300px] mx-auto sm:p-10 py-10 px-5 min-h-screen">
@@ -66,11 +88,16 @@ export default function kyc() {
         </li>
       </ol>
 
-      {/* Render Form or VideoFeed based on currentStep */}
       {currentStep === 1 && <Form onNextStep={handleNextStep} />}
       {currentStep === 2 && <AadhaarVerification onNextStep={handleNextStep} />}
       {currentStep === 3 && <CaptureFrame onNextStep={handleNextStep} />}
       {currentStep === 4 && <VerifyAndComplete />}
+      {/* <button
+        className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        onClick={startVoice}
+      >
+        Start Voice
+      </button> */}
     </div>
   );
 }

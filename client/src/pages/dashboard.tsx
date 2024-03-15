@@ -26,6 +26,25 @@ export default function Dashboard() {
     },
   ];
 
+  const speakMessage = (message) => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      const speech = new SpeechSynthesisUtterance();
+      speech.text = message;
+      speech.volume = 1;
+      speech.rate = 1;
+      speech.pitch = 1;
+      window.speechSynthesis.speak(speech);
+    }
+  };
+
+  const startVoice = () => {
+    // Manually start the voice synthesis
+    speakMessage("Fill your personal details and upload your documents");
+    speakMessage(
+      "After completing the form, say next to proceed to the next step"
+    );
+  };
+
   return (
     <div className="max-w-[1300px] mx-auto sm:p-10 py-10 px-5 min-h-screen">
       <Navbar />
@@ -45,7 +64,7 @@ export default function Dashboard() {
           </div>
           <section>
             <div></div>
-            <Button asChild>
+            <Button asChild onClick={startVoice}>
               <Link href="/kyc">Start your KYC</Link>
             </Button>
           </section>
