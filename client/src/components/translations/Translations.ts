@@ -89,7 +89,7 @@ const translationJSON = {
         "आपका चेहरा आयत में स्थित करें",
       "Capture Frame": "फ्रेम कैप्चर करें",
       Retake: "पुनः लें",
-      "Save and Continue": "सहेजें और जारी रखें",
+      "Save and continue": "सहेजें और जारी रखें",
       "Image Matched Succesfully": "छवि सफलतापूर्वक मेल खाती है",
       "Take a PAN Card Photograph": "पैन कार्ड की फोटो लें",
       "Position your PAN Card inside the rectangle for photo":
