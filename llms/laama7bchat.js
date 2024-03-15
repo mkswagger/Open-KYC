@@ -4,7 +4,7 @@
 const { default: MonsterApiClient } = require("monsterapi");
 const client = new MonsterApiClient("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjE4ZGQ5MjE3MDNkNzA3MjgxOWU5M2ZiN2RkMGM5YjBmIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDMtMTVUMTc6MTM6MDMuNTE1NDEwIn0._s7PzLZn4-S2Zw4BEGK2uoZxvh7kOTIXbhuXaK4G7jM");
 
-
+const userInput = prompt("Prompt:");
 
 
 const knowledge_base = `KYC Details Step form
@@ -40,13 +40,13 @@ const knowledge_base = `KYC Details Step form
 `;
 
 
-const model = "llama2-7b-chat"; // Replace with the desired model name
+const model = "llama2-7b-chat"; 
 const input = {
-  prompt: "Whats the meaning of life?",
+  prompt: userInput,
   top_k: 10,
   top_p: 0.9,
-  temp: 0.9,
-  max_length: 1000,
+  temp: 0.7,
+  max_length: 200,
   beam_size: 1,
   system_prompt:
         'Here is some relevant context for you: ${knowledge_base}',
