@@ -14,7 +14,7 @@ declare global {
 const CrispChat: React.FC<CrispChatProps> = ({ websiteId }) => {
     useEffect(() => {
         window.$crisp = [];
-        window.CRISP_WEBSITE_ID = "fdd574d2-7cd3-4841-b41d-030f50ad3aeb";
+        window.CRISP_WEBSITE_ID = websiteId;
 
         (function () {
             var d = document;

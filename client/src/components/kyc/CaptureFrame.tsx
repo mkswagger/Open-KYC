@@ -177,11 +177,10 @@ const CaptureFrame = ({ onNextStep }) => {
             </Button>
           )}
         </div>
-        {!showLoader && capturedImages[currentFrame] ? (
-          <div className="loader py-2">Image Matched Succesfully</div>
-        ) : (
-          <div></div>
-        )}
+        {
+          !showLoader && capturedImages[currentFrame] ? <div className="loader py-2">Image Captured</div> : <div>
+          </div>
+        }
       </div>
     </div>
   );
