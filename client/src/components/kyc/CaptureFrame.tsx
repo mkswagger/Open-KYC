@@ -182,7 +182,7 @@ const CaptureFrame = ({ onNextStep }) => {
         </div>
         {!showLoader && capturedImages[currentFrame] ? (
           <div className="loader font-semibold text-md my-4">
-            {t("Image Matched Succesfully")}
+            {t("Image Captured")}
           </div>
         ) : (
           <div></div>
