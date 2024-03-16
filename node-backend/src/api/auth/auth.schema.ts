@@ -67,4 +67,17 @@ export class ForgotPassword {
     }
 }
 
+export const signInSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(8).regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/),
+});
 
+export class SignIn {
+    email: string;
+    password: string;
+
+    constructor(data: z.infer<typeof signInSchema>) {
+        this.email = data.email;
+        this.password = data.password;
+    }
+}

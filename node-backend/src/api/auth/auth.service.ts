@@ -35,7 +35,7 @@ export const handleSignUp = async (data: Signup) => {
 
 export const handleVerifyPhone = async (data: VerifyPhone) => {
     const otpCollection = await (await database()).collection('otp');
-    const otp = await otpCollection.findOne({ device: data.phone });
+    const otp = await otpCollection.findOne({ device: data.phone }, { sort: { createdAt: -1 } });
     if (!otp || otp.otp !== data.otp) {
         throw new Error('Invalid OTP');
     }
@@ -49,7 +49,7 @@ export const handleVerifyPhone = async (data: VerifyPhone) => {
 
 export const handleVerifyEmail = async (data: VerifyEmail) => {
     const otpCollection = await (await database()).collection('otp');
-    const otp = await otpCollection.findOne({ device: data.email });
+    const otp = await otpCollection.findOne({ device: data.email }, { sort: { createdAt: -1 } });
     if (!otp || otp.otp !== data.otp) {
         throw new Error('Invalid OTP');
     }
@@ -93,4 +93,29 @@ export const handleSendOTP = async (device: string) => {
         await sendPhone(device, `Your OTP is ${otp}`);
     }
     await otpCollection.insertOne({ device, otp, createdAt: new Date() });
+};
+
+export const handleSignIn = async (email: string, password: string) => {
+    const userCollection = await (await database()).collection('user');
+    const user = await userCollection.findOne({ email });
+    if (!user) {
+        throw new Error('User not found');
+    }
+    if (!user.isEmailVerified) {
+        throw new Error('Email not verified');
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        throw new Error('Invalid password');
+    }
+
+    const phoneOtp = Math.floor(100000 + Math.random() * 900000) + "";
+    const emailOtp = Math.floor(100000 + Math.random() * 900000) + "";
+    const otpCollection = await (await database()).collection('otp');
+    await otpCollection.insertOne({ device: user.phone, otp: phoneOtp, createdAt: new Date() });
+    await otpCollection.insertOne({ device: user.email, otp: emailOtp, createdAt: new Date() });
+    await sendMail(user.email, 'Verify Email', `Your OTP is ${emailOtp}`);
+    await sendPhone(user.phone, `Your OTP is ${phoneOtp}`);
+
+    return user;
 };

@@ -1,6 +1,13 @@
 import { Request, Response } from "express";
 import { Signup } from "./auth.schema";
-import { handleForgotPassword, handleSendOTP, handleSignUp, handleVerifyEmail, handleVerifyPhone } from "./auth.service";
+import {
+    handleForgotPassword,
+    handleSendOTP,
+    handleSignIn,
+    handleSignUp,
+    handleVerifyEmail,
+    handleVerifyPhone
+} from "./auth.service";
 
 export const signuUp = async (req: Request, res: Response) => {
     try {
@@ -28,6 +35,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
         await handleVerifyEmail({ email, otp });
         res.status(200).json({ message: 'Email verified successfully' });
     } catch (error) {
+        console.error("ERROR", error);
         res.status(400).json({ error: error.message });
     }
 };
@@ -52,3 +60,13 @@ export const sendOTP = async (req: Request, res: Response) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+export const signIn = async (req: Request, res: Response) => {
+    try {
+        const {email, password} = req.body;
+        const user = await handleSignIn(email, password);
+        res.status(200).json({message: 'Signed in successfully', data: { user }});
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}
