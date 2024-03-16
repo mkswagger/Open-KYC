@@ -18,7 +18,7 @@ const CaptureFrame = ({ onNextStep }) => {
   const [currentFrame, setCurrentFrame] = useState("photo");
   const [title, setTitle] = useState("Take a Live Photograph");
   const [subtitle, setSubtitle] = useState(
-    "Position your face inside the rectangle"
+    "Position your face inside the rectangle",
   );
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const CaptureFrame = ({ onNextStep }) => {
         0,
         0,
         rectWidth,
-        rectHeight
+        rectHeight,
       );
 
       const imageDataUrl = canvas.toDataURL("image/png");
@@ -101,14 +101,14 @@ const CaptureFrame = ({ onNextStep }) => {
       setTitle("Take a PAN Card Photograph");
       setSubtitle("Position your PAN Card inside the rectangle for photo");
       speakMessage(
-        "Position your PAN card inside the frame and click the capture button to take a picture of your PAN card. After capturing the picture, proceed to the next step."
+        "Position your PAN card inside the frame and click the capture button to take a picture of your PAN card. After capturing the picture, proceed to the next step.",
       );
     } else if (currentFrame === "pan") {
       setCurrentFrame("aadhar");
       setTitle("Take a Aadhaar Photograph");
       setSubtitle("Position your Aadhaar inside the rectangle for photo");
       speakMessage(
-        "Position your Aadhaar card inside the frame and click the capture button to take a picture of your Aadhaar card. After capturing the picture, proceed to the next step."
+        "Position your Aadhaar card inside the frame and click the capture button to take a picture of your Aadhaar card. After capturing the picture, proceed to the next step.",
       );
     } else {
       // Reached the end, handle saving or navigation logic here
@@ -116,7 +116,7 @@ const CaptureFrame = ({ onNextStep }) => {
       // Example logic: Redirect or navigate to the next step/page
       onNextStep();
       speakMessage(
-        "Congrats your KYC process is completed. Your KYC status will be updated in the dashboard."
+        "Congrats your KYC process is completed. Your KYC status will be updated in the dashboard.",
       );
     }
   };

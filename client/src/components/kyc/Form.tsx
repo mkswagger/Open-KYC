@@ -153,7 +153,7 @@ export default function PersonalDetailsForm({
           </span>
           <span>
             {t(
-              "After completing the form, say next to proceed to the next step."
+              "After completing the form, say next to proceed to the next step.",
             )}
           </span>
         </h2>
@@ -322,7 +322,7 @@ export default function PersonalDetailsForm({
             className="w-full bg-blue-600"
             onClick={() => {
               speakMessage(
-                t("Verify if your Aadhaar details fetched are correct.")
+                t("Verify if your Aadhaar details fetched are correct."),
               );
               onNextStep();
             }}

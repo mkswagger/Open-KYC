@@ -43,7 +43,9 @@ export default function SignInForm({ onSuccess }: { onSuccess: () => void }) {
         throw new Error("Failed to submit form");
       }
 
-      const { data: { user }} = await response.json();
+      const {
+        data: { user },
+      } = await response.json();
 
       localStorage.setItem("email", user.email);
       localStorage.setItem("phone", user.phone);

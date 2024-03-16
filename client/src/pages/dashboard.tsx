@@ -41,7 +41,7 @@ export default function Dashboard() {
     // Manually start the voice synthesis
     speakMessage("Fill your personal details and upload your documents");
     speakMessage(
-      "After completing the form, say next to proceed to the next step"
+      "After completing the form, say next to proceed to the next step",
     );
   };
 

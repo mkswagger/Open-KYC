@@ -27,6 +27,5 @@ export default function Home() {
         {!signedUp ? <SignIn onSuccess={handleSignUpSuccess} /> : <VerifyOTP />}
       </div>
     </div>
-
   );
 }

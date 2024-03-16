@@ -18,8 +18,14 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
-  phone: z.string().length(13, { message: "Phone number must be 13 characters." }),
-  dob: z.string().regex(/^\d{2}-\d{2}-\d{4}$/, { message: "Invalid date format. Please use DD-MM-YYYY." }),
+  phone: z
+    .string()
+    .length(13, { message: "Phone number must be 13 characters." }),
+  dob: z
+    .string()
+    .regex(/^\d{2}-\d{2}-\d{4}$/, {
+      message: "Invalid date format. Please use DD-MM-YYYY.",
+    }),
 });
 
 export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
@@ -129,7 +135,7 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
         <Link href="/signin" className="text-xs self-center underline">
           Already have an account? Sign In
         </Link>
-    </form>
+      </form>
     </Form>
   );
 }

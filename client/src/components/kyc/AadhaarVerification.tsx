@@ -49,7 +49,7 @@ export default function AadhaarVerification({
   const onSubmit = () => {
     onNextStep();
     speakMessage(
-      "Position your face in the center of the frame and click the capture button to take a picture of your face. After capturing the picture, proceed to the next step."
+      "Position your face in the center of the frame and click the capture button to take a picture of your face. After capturing the picture, proceed to the next step.",
     );
   };
 
