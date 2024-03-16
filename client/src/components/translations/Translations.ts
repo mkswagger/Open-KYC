@@ -36,7 +36,7 @@ const translationJSON = {
       "Capture Frame": "Capture Frame",
       Retake: "Retake",
       "Save and Continue": "Save and Continue",
-      "Image Matched Succesfully": "Image Matched Succesfully",
+      "Image Captured": "Image Captured",
       "Take a PAN Card Photograph": "Take a PAN Card Photograph",
       "Position your PAN Card inside the rectangle for photo":
         "Position your PAN Card inside the rectangle for photo",
@@ -90,7 +90,7 @@ const translationJSON = {
       "Capture Frame": "फ्रेम कैप्चर करें",
       Retake: "पुनः लें",
       "Save and continue": "सहेजें और जारी रखें",
-      "Image Matched Succesfully": "छवि सफलतापूर्वक मेल खाती है",
+      "Image Captured": "छवि सफलतापूर्वक मेल खाती है",
       "Take a PAN Card Photograph": "पैन कार्ड की फोटो लें",
       "Position your PAN Card inside the rectangle for photo":
         "फोटो के लिए आपका पैन कार्ड आयत में स्थित करें",

@@ -22,7 +22,7 @@ export default function InputFile() {
       console.log("data", data);
       localStorage.setItem(
         "aadhar-data",
-        JSON.stringify(xmlToJson(data.qr_data))
+        JSON.stringify(xmlToJson(data.qr_data)),
       );
       console.log("aadhaar data", localStorage.getItem("aadhar-data"));
       setIsUploaded(true);

@@ -20,15 +20,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -162,7 +153,7 @@ export default function PersonalDetailsForm({
           </span>
           <span>
             {t(
-              "After completing the form, say next to proceed to the next step."
+              "After completing the form, say next to proceed to the next step.",
             )}
           </span>
         </h2>
@@ -331,7 +322,7 @@ export default function PersonalDetailsForm({
             className="w-full bg-blue-600"
             onClick={() => {
               speakMessage(
-                t("Verify if your Aadhaar details fetched are correct.")
+                t("Verify if your Aadhaar details fetched are correct."),
               );
               onNextStep();
             }}

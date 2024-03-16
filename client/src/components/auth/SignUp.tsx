@@ -11,14 +11,21 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
-  phone: z.string().length(13, { message: "Phone number must be 13 characters." }),
-  dob: z.string().regex(/^\d{2}-\d{2}-\d{4}$/, { message: "Invalid date format. Please use DD-MM-YYYY." }),
+  phone: z
+    .string()
+    .length(13, { message: "Phone number must be 13 characters." }),
+  dob: z
+    .string()
+    .regex(/^\d{2}-\d{2}-\d{4}$/, {
+      message: "Invalid date format. Please use DD-MM-YYYY.",
+    }),
 });
 
 export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
@@ -75,10 +82,10 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
           name="email"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Email</FormLabel> */}
               <FormControl>
                 <Input placeholder="Enter your email address" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -87,10 +94,10 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Phone</FormLabel> */}
               <FormControl>
                 <Input placeholder="Enter your phone number" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -107,6 +114,7 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -119,11 +127,14 @@ export default function SignUpForm({ onSuccess }: { onSuccess: () => void }) {
               <FormControl>
                 <Input placeholder="Enter your date of birth" {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
-        <FormMessage />
         <Button type="submit">Next</Button>
+        <Link href="/signin" className="text-xs self-center underline">
+          Already have an account? Sign In
+        </Link>
       </form>
     </Form>
   );

@@ -39,7 +39,7 @@ export default function OtpVerify() {
     resolver: zodResolver(emailformSchema),
     defaultValues: {
       email: localStorage.getItem("email") || "",
-      otp: ""
+      otp: "",
     },
   });
 
@@ -47,7 +47,7 @@ export default function OtpVerify() {
     resolver: zodResolver(phoneformSchema),
     defaultValues: {
       phone: localStorage.getItem("phone") || "",
-      otp: ""
+      otp: "",
     },
   });
 
@@ -59,7 +59,10 @@ export default function OtpVerify() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          device: device === "email" ? localStorage.getItem("email") : localStorage.getItem("phone"),
+          device:
+            device === "email"
+              ? localStorage.getItem("email")
+              : localStorage.getItem("phone"),
         }),
       });
 
@@ -75,13 +78,16 @@ export default function OtpVerify() {
 
   const onEmailSubmit = async (values: z.infer<typeof emailformSchema>) => {
     try {
-      const response = await fetch(`http://localhost:5001/api/auth/verify-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `http://localhost:5001/api/auth/verify-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
         },
-        body: JSON.stringify(values),
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Failed to submit form");
@@ -97,13 +103,16 @@ export default function OtpVerify() {
 
   const onPhoneSubmit = async (values: z.infer<typeof phoneformSchema>) => {
     try {
-      const response = await fetch("http://localhost:5001/api/auth/verify-phone", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "http://localhost:5001/api/auth/verify-phone",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
         },
-        body: JSON.stringify(values),
-      });
+      );
 
       if (!response.ok) {
         throw new Error("Failed to submit form");
@@ -145,7 +154,11 @@ export default function OtpVerify() {
             <FormItem>
               <FormLabel>Email OTP</FormLabel>
               <FormControl>
-                <Input disabled={emailVerified} placeholder="XXXXXX" {...field} />
+                <Input
+                  disabled={emailVerified}
+                  placeholder="XXXXXX"
+                  {...field}
+                />
               </FormControl>
               <p
                 onClick={() => sendOtp("email")}
@@ -153,14 +166,16 @@ export default function OtpVerify() {
               >
                 Resend OTP?
               </p>
-              {
-                !emailVerified ? <Button
+              {!emailVerified ? (
+                <Button
                   onClick={emailform.handleSubmit(onEmailSubmit)}
                   className="w-full"
                 >
                   Verify Email
-                </Button> : <p className="w-full">Email Verified</p>
-              }
+                </Button>
+              ) : (
+                <p className="w-full">Email Verified</p>
+              )}
             </FormItem>
           )}
         />
@@ -174,7 +189,11 @@ export default function OtpVerify() {
             <FormItem>
               <FormLabel>Phone OTP</FormLabel>
               <FormControl>
-                <Input disabled={phoneVerified} placeholder="XXXXXX" {...field} />
+                <Input
+                  disabled={phoneVerified}
+                  placeholder="XXXXXX"
+                  {...field}
+                />
               </FormControl>
               <p
                 onClick={() => sendOtp("phone")}
@@ -182,14 +201,16 @@ export default function OtpVerify() {
               >
                 Resend OTP?
               </p>
-              {
-                !phoneVerified ? <Button
+              {!phoneVerified ? (
+                <Button
                   onClick={phoneform.handleSubmit(onPhoneSubmit)}
                   className="w-full"
                 >
                   Verify Phone
-                </Button> : <p className="w-full">Phone Verified</p>
-              }
+                </Button>
+              ) : (
+                <p className="w-full">Phone Verified</p>
+              )}
             </FormItem>
           )}
         />
